@@ -4,6 +4,7 @@ import Goals from '../Goals'
 import List from '../List'
 import Finances from '../Finances'
 import Calendar from '../Calendar'
+import GoalForm from '../GoalForm'
 
 class Dashboard extends React.Component {
 
@@ -41,7 +42,20 @@ componentDidMount () {
 
 }
 
+listSubmit = (e) => {
+  e.preventDefault()
+  let newName = e.target[0].value
+  let newStartDate = e.target[1].value
+  let newCompletionDate = e.target[2].value
+  // console.log(newName, newStartDate, newCompletionDate)
 
+let newGoal = {
+  "name": newName, 
+  "start_date": newStartDate, 
+  "completion_date": newCompletionDate
+}
+// this.Newfunction(newGoal)
+}
 
 
   render(){
@@ -52,7 +66,8 @@ componentDidMount () {
         <Trips trips={this.state.trips}/>
         <hr></hr>
         <h4>Weekly Goals</h4>
-        <Goals goals={this.state.goals}/>
+        <GoalForm listSubmit={this.listSubmit}/>
+        <Goals goals={this.state.goals} />
         <hr></hr>
         <h4>To do List</h4>
         <List list={this.state.list}/>

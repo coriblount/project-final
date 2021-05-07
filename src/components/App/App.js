@@ -11,9 +11,11 @@ function App() {
     return <Login setToken={console.log()} />
   }
 
+
   return (
     <div className="wrapper">
-      <h1>Application</h1>
+      <h1>My Planner</h1>
+      <a href='./dashboard'><h3>Dashboard</h3></a>
       <BrowserRouter>
         <Switch>
           <Route path="/dashboard">

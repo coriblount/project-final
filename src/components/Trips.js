@@ -1,22 +1,18 @@
+
 import React from 'react'
+import Trip from "./Trip"
 
 const Trips = (props) => { 
-
- let trips = props.trips.map(trip => <div key={trip.id} >
-     <li>{trip.name}, {trip.date}, {trip.destination}</li>
-     </div>)
 
 
 return (
 <div>
-<form>New Trip</form>
-<input type="text"></input>
-<button type="submit">Add</button>
-{trips}
+{props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
 </div>
 )
 
 }
 
 
-export default Trips 
+export default Trips
+

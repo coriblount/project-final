@@ -5,6 +5,7 @@ import List from '../List'
 import Finances from '../Finances'
 import Calendar from '../Calendar'
 import GoalForm from '../GoalForm'
+import TripForm from '../TripForm'
 
 class Dashboard extends React.Component {
 
@@ -17,7 +18,6 @@ state = {
 }
 
 componentDidMount () {
-  console.log('test')
   fetch("http://localhost:3000/trips")
   .then(resp => resp.json())
   .then(data => this.setState({trips: data}))
@@ -57,13 +57,28 @@ let newGoal = {
 // this.Newfunction(newGoal)
 }
 
+tripSubmit = (e) =>{
+  e.preventDefault()
+  let newName = e.target[0].value
+  let newDate = e.target[1].value
+  let newDestination = e.target[2].value
+
+  let newTrip = {
+    "name": newName, 
+    "date": newDate,
+    "destination" : newDestination
+  }
+
+}
 
   render(){
 
     return(
       <div>
         <h4>My Trips</h4>
-        <Trips trips={this.state.trips}/>
+        <TripForm />
+        <Trips trips={this.state.trips} tripSubmit={this.tripSubmit}/>
+   
         <hr></hr>
         <h4>Weekly Goals</h4>
         <GoalForm listSubmit={this.listSubmit}/>

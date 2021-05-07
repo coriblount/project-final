@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class AddTrip extends Component {
 render() {
 
-    
+
     return (
         <div>
 <form onSubmit={this.props.tripSubmit}>
@@ -13,7 +13,7 @@ render() {
 <br></br>
 <input type="text" name="destination" placeholder="completion date"></input>
 <br></br>
-<button type="submit">Create</button>
+<button type="submit">Add Trip</button>
 <br></br>
 </form>
         </div>

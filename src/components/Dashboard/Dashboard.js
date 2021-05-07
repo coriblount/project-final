@@ -6,6 +6,7 @@ import Finances from '../Finances'
 import Calendar from '../Calendar'
 import GoalForm from '../GoalForm'
 import TripForm from '../TripForm'
+import FinanceForm from '../FinanceForm'
 
 class Dashboard extends React.Component {
 
@@ -88,6 +89,7 @@ tripSubmit = (e) =>{
         <List list={this.state.list}/>
         <hr></hr>
         <h4>Finances</h4>
+        <FinanceForm/>
         <Finances finances={this.state.finances}/>
         <h4>Calendar</h4>
         <Calendar appointments={this.state.appointments}/>

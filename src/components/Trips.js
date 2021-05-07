@@ -3,7 +3,7 @@ import React from 'react'
 const Trips = (props) => { 
 
  let trips = props.trips.map(trip => <div key={trip.id} >
-     <h4>{trip.name}, {trip.date}, {trip.destination}</h4>
+     <li>{trip.name}, {trip.date}, {trip.destination}</li>
      </div>)
 
 

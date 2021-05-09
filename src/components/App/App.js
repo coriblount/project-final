@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login'
-import Preferences from '../Preferences/Preferences';
+import Logout from '../Login/Logout'
+// import Preferences from '../Preferences/Preferences';
 
 function App() {
 
@@ -14,17 +15,25 @@ function App() {
 
   return (
     <div className="wrapper">
+      <img src="https://finac.nl/wp-content/uploads/2020/09/ill-financiele-planning.png" alt="calendar" width="200" height="150"></img>
       <h1>My Planner</h1>
-      <a href='./dashboard'><h3>Dashboard</h3></a>
+      <button className="button"><a id="link" href='./dashboard'><h3>Dashboard</h3></a></button>
+      <br></br>
+      <button className="button"><a id="link" href='/'><h3>My Information</h3></a></button>
       <BrowserRouter>
         <Switch>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
-          <Route path="/preferences">
+          {/* <Route path="/preferences">
             <Preferences />
+          </Route> */}
+            <Route path="/logout">
+            <Logout />
           </Route>
         </Switch>
+        <br></br>
+        <button className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
       </BrowserRouter>
     </div>
   );

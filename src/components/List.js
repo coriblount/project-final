@@ -9,9 +9,11 @@ const Lists = (props) => {
 
 return (
 <div>
-<form>New item</form>
-<input type="text"></input>
-<button type="submit">Add</button>
+<form>
+<input type="text" name="name" placeholder="task"></input>
+<br></br>
+<button type="submit">Add task</button>
+</form>
 {lists}
 </div>
 )

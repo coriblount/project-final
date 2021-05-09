@@ -15,7 +15,11 @@ state = {
   goals: [],
   list: [], 
   finances: [], 
-  appointments: []
+  appointments: [],
+  allGoals: false,
+  goalForm: false,
+  allTrips: false,
+  tripForm: false
 }
 
 componentDidMount () {
@@ -45,18 +49,27 @@ componentDidMount () {
 
 listSubmit = (e) => {
   e.preventDefault()
-  let newName = e.target[0].value
-  let newStartDate = e.target[1].value
-  let newCompletionDate = e.target[2].value
-  // console.log(newName, newStartDate, newCompletionDate)
 
 let newGoal = {
-  "name": newName, 
-  "start_date": newStartDate, 
-  "completion_date": newCompletionDate
+  "name": e.target[0].value,
+  "start_date": e.target[1].value,
+  "completion_date": e.target[2].value
 }
-// this.Newfunction(newGoal)
+console.log(newGoal)
+fetch("http://localhost:3000/goals/", {
+  method: "POST", 
+  headers: {
+    'content-type': 'application/json',
+    'accept':'application/json'
+  },
+  body: JSON.stringify(newGoal)
+})
+.then(resp => resp.json())
+.then(newGoal => this.setState({
+  goals: [...this.state.goals, newGoal]
+}))
 }
+
 
 tripSubmit = (e) =>{
   e.preventDefault()
@@ -69,21 +82,58 @@ tripSubmit = (e) =>{
     "date": newDate,
     "destination" : newDestination
   }
-
+console.log(newTrip)
+fetch("http://localhost:3000/trips/", {
+  method: "POST", 
+  headers: {
+    'content-type': 'application/json',
+    'accept':'application/json'
+  },
+  body: JSON.stringify(newTrip)
+})
+.then(resp => resp.json())
+.then(newTrip => this.setState({
+  goals: [...this.state.trips, newTrip]
+}))
 }
+
+allGoals = () => {
+  // console.log('clicked')
+  this.setState({allGoals: !this.state.allGoals})
+}
+
+goalForm = () => {
+  // console.log('clicked')
+  this.setState({goalForm: !this.state.goalForm})
+}
+
+allTrips = () => {
+  // console.log('clicked')
+  this.setState({allTrips: !this.state.allTrips})
+}
+
+tripForm = () => {
+  // console.log('clicked')
+  this.setState({tripForm: !this.state.tripForm})
+}
+
+
 
   render(){
 
     return(
       <div>
-        <h4>My Trips</h4>
-        <TripForm />
-        <Trips trips={this.state.trips} tripSubmit={this.tripSubmit}/>
-   
-        <hr></hr>
         <h4>Weekly Goals</h4>
-        <GoalForm listSubmit={this.listSubmit}/>
-        <Goals goals={this.state.goals} />
+        <button className="button" onClick={this.allGoals}><h3>My goals</h3></button>
+        <button className="button" onClick={this.goalForm}><h3>Add new Goal</h3></button>
+        {this.state.goalForm && <GoalForm listSubmit={this.listSubmit}/>}
+        {this.state.allGoals && <Goals goals={this.state.goals} />}
+        <hr></hr>
+        <h4>Travel</h4>
+        <h5 onClick={this.allTrips}>My Trips</h5>
+        <h5 onClick={this.tripForm}>Add a new trip</h5>
+        {this.state.tripForm &&  <TripForm tripSubmit={this.tripSubmit}/>}
+        {this.state.allTrips &&  <Trips trips={this.state.trips}/>}
         <hr></hr>
         <h4>To do List</h4>
         <List list={this.state.list}/>

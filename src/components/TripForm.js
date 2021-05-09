@@ -9,11 +9,11 @@ render() {
 <form onSubmit={this.props.tripSubmit}>
 <input type="text" name="name" placeholder="name"></input>
 <br></br>
-<input type="text" name="date" placeholder="start date"></input>
+<input type="text" name="date" placeholder="date"></input>
 <br></br>
-<input type="text" name="destination" placeholder="completion date"></input>
+<input type="text" name="destination" placeholder="destination"></input>
 <br></br>
-<button type="submit">Add Trip</button>
+<button className="button" type="submit">Add Trip</button>
 <br></br>
 </form>
         </div>

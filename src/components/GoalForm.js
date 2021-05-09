@@ -11,7 +11,7 @@ render() {
 <br></br>
 <input type="text" name="completion_date" placeholder="completion date"></input>
 <br></br>
-<button type="submit">Create</button>
+<button className="action-button" type="submit">Add Goal</button>
 <br></br>
 </form>
         </div>

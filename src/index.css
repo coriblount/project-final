@@ -1,13 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=New+Tegomin&family=Open+Sans+Condensed:wght@300&display=swap');
+
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* background: url("") no-repeat center center fixed;  */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+    font-size: 3rem;
+    color: rgb(172, 25, 25);
+    text-align: inline;
+    /* background: rgb(255, 255, 255); */
+    margin-bottom: 5rem;
 }
+
+h4 {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: inline;
+    background: rgb(92, 48, 48);
+}
+
+* {
+  font-family: 'New Tegomin';
+}
+
+.action-button {
+  font-size: 0.6rem;
+  height: 1.2rem;
+  text-align: inline;
+  color: rgb(253, 253, 253);
+  background: rgb(92, 48, 48);
+  border-radius: 25px;
+}
+
+.action-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 255, 255, 0.6);
+  transition: transform 150ms;
+  transform: scale(1.05);
+}
+
+.button {
+  font-size: 0.6rem;
+  height: 2.3rem;
+  text-align: center; 
+  line-height: 0rem;
+  color: rgb(255, 255, 255);
+  background: rgb(216, 120, 120);
+  border-radius: 25px;
+
+}
+
+#link { color: #ffffff; 
+text-decoration: none;} 
+#link:hover { color: rgb(172, 25, 25); } 

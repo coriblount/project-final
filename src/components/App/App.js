@@ -20,6 +20,7 @@ function App() {
       <h1>My Planner</h1>
       <button className="button"><a id="link" href='./dashboard'><h3>Dashboard</h3></a></button>
       <br></br>
+      <br></br>
       <button className="button"><a id="link" href='./information'><h3>My Information</h3></a></button>
       <BrowserRouter>
         <Switch>
@@ -36,6 +37,7 @@ function App() {
             <Logout />
           </Route>
         </Switch>
+        <br></br>
         <br></br>
         <button className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
       </BrowserRouter>

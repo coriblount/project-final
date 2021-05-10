@@ -39,7 +39,6 @@ componentDidMount () {
   .then(resp => resp.json())
   .then(data => this.setState({goals: data}))
 
-
    fetch("http://localhost:3000/list_items")
   .then(resp => resp.json())
   .then(data => this.setState({list: data}))
@@ -63,8 +62,8 @@ let newGoal = {
   "start_date": e.target[1].value,
   "completion_date": e.target[2].value
 }
-console.log(newGoal)
-fetch("http://localhost:3000/goals/", {
+// console.log(newGoal)
+fetch("http://localhost:3000/goals", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
@@ -73,11 +72,11 @@ fetch("http://localhost:3000/goals/", {
   body: JSON.stringify(newGoal)
 })
 .then(resp => resp.json())
-.then(newGoal => this.setState({
-  goals: [...this.state.goals, newGoal]
-}))
+.then(newGoal => console.log(newGoal))
+//   this.setState({
+//   goals: [...this.state.goals, newGoal]
+// })
 }
-
 
 tripSubmit = (e) =>{
   e.preventDefault()
@@ -90,7 +89,7 @@ tripSubmit = (e) =>{
     "date": newDate,
     "destination" : newDestination
   }
-console.log(newTrip)
+// console.log(newTrip)
 fetch("http://localhost:3000/trips/", {
   method: "POST", 
   headers: {
@@ -100,24 +99,72 @@ fetch("http://localhost:3000/trips/", {
   body: JSON.stringify(newTrip)
 })
 .then(resp => resp.json())
-.then(newTrip => this.setState({
-  goals: [...this.state.trips, newTrip]
-}))
+.then(newTrip => console.log(newTrip))
+//    this.setState({
+//   trips: [...this.state.trips, newTrip]
+// }))
 }
 
 handleAppointment = (e) => {
 e.preventDefault()
-let newName = e.target[0].value
-let newDate = e.target[1].value
-let newTime = e.target[2].value
+// console.log(e.target.value)
 
+// let newName = e.target[0].name
+// let newDate = e.target[1].value
+// let newDestination = e.target[2].value
 let newAppointment = {
-"name": newName,
-"date": newDate, 
-"time": newTime
+name: e.target[0].value,
+date: e.target[1].value,
+time: e.target[2].value
 }
 
+// console.log(newAppointment)
+
+fetch("http://localhost:3000/appointments/", {
+  method: "POST", 
+  headers: {
+    'content-type': 'application/json',
+    'accept':'application/json'
+  },
+  body: JSON.stringify(newAppointment)
+})
+.then(resp => resp.json())
+.then(newAppt => console.log(newAppt))
+//   this.setState({
+//   appointments: [...this.state.appointments, newAppointment]
+// }))
 }
+
+submitExpense = (e) => {
+e.preventDefault()
+// console.log(e.target.value)
+
+// let newName = e.target[0].name
+// let newDate = e.target[1].value
+// let newDestination = e.target[2].value
+let newExpense = {
+name: e.target[0].value,
+amount: e.target[1].value,
+month: e.target[2].value
+}
+
+// console.log(newExpense)
+
+fetch("http://localhost:3000/finance_items", {
+  method: "POST", 
+  headers: {
+    'content-type': 'application/json',
+    'accept':'application/json'
+  },
+  body: JSON.stringify(newExpense)
+})
+.then(resp => resp.json())
+.then(newExpense=> console.log(newExpense))
+//   this.setState({
+//   appointments: [...this.state.appointments, newAppointment]
+// }))
+}
+
 
 
 allGoals = () => {
@@ -167,17 +214,24 @@ this.setState({apptForm: !this.state.apptForm})
 
 todoSubmit = (e) => {
   e.preventDefault()
+// console.log(e)
 
-fetch("http://localhost:3000/list_items/", {
+let newTask = {name: e.target[0].value}
+// console.log(newTask)
+
+fetch("http://localhost:3000/list_items", {
   method: "POST", 
   headers: {
-    'content-type': 'application/json',
-    'accept':'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   },
-  body: JSON.stringify({"name": e.target.name.value})
+  body: JSON.stringify(newTask)
 })
 .then(resp => resp.json())
-.then(newTodo => this.setState({list: newTodo}))
+.then(newTodo => console.log(newTodo)
+  // this.setState
+  //   ({list: newTodo})
+    )
 }
 
 
@@ -199,7 +253,7 @@ fetch("http://localhost:3000/list_items/", {
         <h4>Finances</h4>
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
-        {this.state.financeForm && <FinanceForm />}
+        {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
         {this.state.allFinance && <Finances finances={this.state.finances}/>}
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class AddExpense extends Component {
+class FinanceForm extends Component {
 render() {
     return (
         <div>
@@ -23,4 +23,4 @@ render() {
 
 }
 
-export default AddExpense
+export default FinanceForm

@@ -4,6 +4,7 @@ class AddGoal extends Component {
 render() {
     return (
         <div>
+            
 <form onSubmit={this.props.listSubmit}>
 <input type="text" name="name" placeholder="name"></input>
 <br></br>

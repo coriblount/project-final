@@ -10,7 +10,7 @@ const exercise = [
 // const sleep = [
 //   { name: 'done', value: 1 },
 //   { name: 'remaining', value: 6 }
-// ];
+// ]; 
 
 
 // const water = [
@@ -29,9 +29,10 @@ handleDone = () => {
     
 
 render() {
+
+
 return (
 
-    
 
 <div>
     <li>{this.props.goal.name}</li>

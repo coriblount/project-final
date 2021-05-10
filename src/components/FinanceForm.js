@@ -11,7 +11,7 @@ render() {
 <br></br>
 <input type="text" name="month" placeholder="month"></input>
 <br></br>
-<button type="submit">Add Expense</button>
+<button className={"action-button"} type="submit">Add Expense</button>
 <br></br>
 </form>
         </div>

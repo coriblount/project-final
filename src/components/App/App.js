@@ -4,6 +4,7 @@ import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login'
 import Logout from '../Login/Logout'
+import Information from '../Information/Information'
 // import Preferences from '../Preferences/Preferences';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       <h1>My Planner</h1>
       <button className="button"><a id="link" href='./dashboard'><h3>Dashboard</h3></a></button>
       <br></br>
-      <button className="button"><a id="link" href='/'><h3>My Information</h3></a></button>
+      <button className="button"><a id="link" href='./information'><h3>My Information</h3></a></button>
       <BrowserRouter>
         <Switch>
           <Route path="/dashboard">
@@ -28,6 +29,9 @@ function App() {
           {/* <Route path="/preferences">
             <Preferences />
           </Route> */}
+          <Route path="/information">
+          <Information />
+          </Route>
             <Route path="/logout">
             <Logout />
           </Route>

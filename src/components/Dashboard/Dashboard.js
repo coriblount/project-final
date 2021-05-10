@@ -3,11 +3,12 @@ import Trips from '../Trips'
 import Goals from '../Goals'
 import Lists from '../Lists'
 import Finances from '../Finances'
-import Calendar from '../Calendar'
+import Calendars from '../Calendars'
 import GoalForm from '../GoalForm'
 import TripForm from '../TripForm'
 import FinanceForm from '../FinanceForm'
 import ListForm from '../ListForm'
+import CalendarForm from '../CalendarForm'
 
 class Dashboard extends React.Component {
 
@@ -24,7 +25,9 @@ state = {
   allList: false,
   listForm: false,
   allFinance: false,
-  financeForm: false
+  financeForm: false,
+  allAppt: false,
+  apptForm: false
 }
 
 componentDidMount () {
@@ -102,6 +105,21 @@ fetch("http://localhost:3000/trips/", {
 }))
 }
 
+handleAppointment = (e) => {
+e.preventDefault()
+let newName = e.target[0].value
+let newDate = e.target[1].value
+let newTime = e.target[2].value
+
+let newAppointment = {
+"name": newName,
+"date": newDate, 
+"time": newTime
+}
+
+}
+
+
 allGoals = () => {
   // console.log('clicked')
   this.setState({allGoals: !this.state.allGoals})
@@ -138,7 +156,13 @@ financeForm = () => {
 this.setState({financeForm: !this.state.financeForm})
 }
 
+allAppt = () => {
+  this.setState({allAppt: !this.state.allAppt})
+}
 
+apptForm = () => {
+this.setState({apptForm: !this.state.apptForm})
+}
 
 
 todoSubmit = (e) => {
@@ -191,7 +215,10 @@ fetch("http://localhost:3000/list_items", {
         {this.state.financeForm && <FinanceForm />}
         {this.state.allFinance && <Finances finances={this.state.finances}/>}
         <h4>Calendar</h4>
-        <Calendar appointments={this.state.appointments}/>
+        <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
+        <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
+        {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
+        {this.state.allAppt && <Calendars appointments={this.state.appointments}/>}
       </div>
     )
   }

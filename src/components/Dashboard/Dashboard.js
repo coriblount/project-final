@@ -1,12 +1,13 @@
 import React from 'react';
 import Trips from '../Trips'
 import Goals from '../Goals'
-import List from '../List'
+import Lists from '../Lists'
 import Finances from '../Finances'
 import Calendar from '../Calendar'
 import GoalForm from '../GoalForm'
 import TripForm from '../TripForm'
 import FinanceForm from '../FinanceForm'
+import ListForm from '../ListForm'
 
 class Dashboard extends React.Component {
 
@@ -19,7 +20,11 @@ state = {
   allGoals: false,
   goalForm: false,
   allTrips: false,
-  tripForm: false
+  tripForm: false,
+  allList: false,
+  listForm: false,
+  allFinance: false,
+  financeForm: false
 }
 
 componentDidMount () {
@@ -64,7 +69,7 @@ fetch("http://localhost:3000/goals/", {
   },
   body: JSON.stringify(newGoal)
 })
-.then(resp => resp.json())
+.then(resp => resp.text())
 .then(newGoal => this.setState({
   goals: [...this.state.goals, newGoal]
 }))
@@ -117,6 +122,45 @@ tripForm = () => {
   this.setState({tripForm: !this.state.tripForm})
 }
 
+allList = () => {
+  this.setState({allList: !this.state.allList})
+}
+
+listForm = () => {
+this.setState({listForm: !this.state.listForm})
+}
+
+allFinance = () => {
+  this.setState({allFinance: !this.state.allFinance})
+}
+
+financeForm = () => {
+this.setState({financeForm: !this.state.financeForm})
+}
+
+
+
+
+todoSubmit = (e) => {
+  e.preventDefault()
+
+let newTodo = {
+  "name": e.target[0].value
+}
+console.log(newTodo)
+fetch("http://localhost:3000/list_items", {
+  method: "POST", 
+  headers: {
+    'content-type': 'application/json',
+    'accept':'application/json'
+  },
+  body: JSON.stringify(newTodo)
+})
+.then(resp => resp.text())
+.then(newTodo => this.setState({
+  goals: [...this.state.list, newTodo]
+}))
+}
 
 
   render(){
@@ -130,17 +174,22 @@ tripForm = () => {
         {this.state.allGoals && <Goals goals={this.state.goals} />}
         <hr></hr>
         <h4>Travel</h4>
-        <h5 onClick={this.allTrips}>My Trips</h5>
-        <h5 onClick={this.tripForm}>Add a new trip</h5>
+        <button className="button" onClick={this.allTrips}>My Trips</button>
+        <button className="button" onClick={this.tripForm}>Add a new trip</button>
         {this.state.tripForm &&  <TripForm tripSubmit={this.tripSubmit}/>}
         {this.state.allTrips &&  <Trips trips={this.state.trips}/>}
         <hr></hr>
         <h4>To do List</h4>
-        <List list={this.state.list}/>
+        <button className="button" onClick={this.allList}><h3>Todo List</h3></button>
+        <button className="button" onClick={this.listForm}><h3>New task</h3></button>
+        {this.state.listForm && <ListForm todoSubmit={this.todoSubmit}/>}
+        {this.state.allList && <Lists list={this.state.list}/>}
         <hr></hr>
         <h4>Finances</h4>
-        <FinanceForm/>
-        <Finances finances={this.state.finances}/>
+        <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
+        <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
+        {this.state.financeForm && <FinanceForm />}
+        {this.state.allFinance && <Finances finances={this.state.finances}/>}
         <h4>Calendar</h4>
         <Calendar appointments={this.state.appointments}/>
       </div>

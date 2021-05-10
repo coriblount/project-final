@@ -7,7 +7,7 @@ const Goals = (props) => {
 
 return (
 <div>
-{props.goals.map(goal => <Goal key={goal.id} goal={goal} listSubmit={props.listSubmit}/>)}
+{props.goals.map(goal => <Goal key={goal.id} goal={goal} goalSubmit={props.goalSubmit}/>)}
 </div>
 )
 

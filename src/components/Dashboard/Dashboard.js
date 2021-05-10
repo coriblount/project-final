@@ -97,6 +97,20 @@ fetch("http://localhost:3000/trips/", {
 }))
 }
 
+handleAppointment = (e) => {
+e.preventDefault()
+let newName = e.target[0].value
+let newDate = e.target[1].value
+let newTime = e.target[2].value
+
+let newAppointment = {
+"name": newName,
+"date": newDate, 
+"time": newTime
+}
+}
+
+
 allGoals = () => {
   // console.log('clicked')
   this.setState({allGoals: !this.state.allGoals})

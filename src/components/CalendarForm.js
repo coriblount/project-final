@@ -14,7 +14,7 @@ class addAppointment extends React.Component {
         <br></br>
         <button type="submit">Add Appointment</button>
         </form>
-        {calendar}
+        {this.props.appointment}
 
         </div>
         )

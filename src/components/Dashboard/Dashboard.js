@@ -72,7 +72,7 @@ fetch("http://localhost:3000/goals/", {
   },
   body: JSON.stringify(newGoal)
 })
-.then(resp => resp.text())
+.then(resp => resp.json())
 .then(newGoal => this.setState({
   goals: [...this.state.goals, newGoal]
 }))
@@ -168,7 +168,7 @@ this.setState({apptForm: !this.state.apptForm})
 todoSubmit = (e) => {
   e.preventDefault()
 
-fetch("http://localhost:3000/list_items", {
+fetch("http://localhost:3000/list_items/", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',

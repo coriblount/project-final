@@ -5,7 +5,7 @@ class addAppointment extends React.Component {
     return(
         <div>
         <form onClick={this.handleAppointment}>
-        New item
+      
         <input type="text" name="name" placeholder="name"></input>
         <br></br>
         <input type="text" name="date" placeholder="date"></input>

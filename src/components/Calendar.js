@@ -6,9 +6,6 @@ return(
     <li>{appt.name}, {appt.date}, {appt.time}</li>
     </div>)
 
- 
-    
-
 
 }
 

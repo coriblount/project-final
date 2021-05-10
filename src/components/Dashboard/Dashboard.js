@@ -3,10 +3,11 @@ import Trips from '../Trips'
 import Goals from '../Goals'
 import List from '../List'
 import Finances from '../Finances'
-import Calendar from '../Calendar'
+import Calendars from '../Calendars'
 import GoalForm from '../GoalForm'
 import TripForm from '../TripForm'
 import FinanceForm from '../FinanceForm'
+import CalendarForm from '../CalendarForm';
 
 class Dashboard extends React.Component {
 
@@ -153,10 +154,11 @@ tripForm = () => {
         <List list={this.state.list}/>
         <hr></hr>
         <h4>Finances</h4>
-        <FinanceForm/>
+        <FinanceForm submitExpense={this.submitExpense}/>
         <Finances finances={this.state.finances}/>
         <h4>Calendar</h4>
-        <Calendar appointments={this.state.appointments}/>
+        <CalendarForm handleAppointment={this.handleAppointment}/>
+        <Calendars appointments={this.state.appointments}/>
       </div>
     )
   }

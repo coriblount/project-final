@@ -9,6 +9,7 @@ import TripForm from '../TripForm'
 import FinanceForm from '../FinanceForm'
 import ListForm from '../ListForm'
 import CalendarForm from '../CalendarForm'
+import SearchForm from '../SearchForm'
 
 class Dashboard extends React.Component {
 
@@ -27,7 +28,9 @@ state = {
   allFinance: false,
   financeForm: false,
   allAppt: false,
-  apptForm: false
+  apptForm: false, 
+  sortedFinances: [],
+  showFinances: []
 }
 
 componentDidMount () {
@@ -46,7 +49,8 @@ componentDidMount () {
 
    fetch("http://localhost:3000/finance_items")
   .then(resp => resp.json())
-  .then(data => this.setState({finances: data}))
+  .then(data => this.setState({finances: data,
+  showFinances: data}))
 
 
    fetch("http://localhost:3000/appointments")
@@ -180,6 +184,12 @@ fetch("http://localhost:3000/list_items/", {
 .then(newTodo => this.setState({list: newTodo}))
 }
 
+searchFinances = (searchTerm) => {
+  this.setState({
+    showFinances: this.state.finances.filter(finance => finance.month.includes(searchTerm))
+  })
+}
+
 
   render(){
 
@@ -199,6 +209,7 @@ fetch("http://localhost:3000/list_items/", {
         <h4>Finances</h4>
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
+        <SearchForm searchFinances={this.searchFinances}/>
         {this.state.financeForm && <FinanceForm />}
         {this.state.allFinance && <Finances finances={this.state.finances}/>}
         <h4>Travel</h4>

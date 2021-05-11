@@ -208,7 +208,6 @@ fetch("http://localhost:3000/finance_items", {
 }
 
 
-
 allGoals = () => {
   // console.log('clicked')
   this.setState({allGoals: !this.state.allGoals})
@@ -330,10 +329,6 @@ tripEdit = () => {
 tripDelete = () => {
     console.log('delete trip')
 }
-
-
-
-
 
 searchAppointments = (e) => {
 this.setState({

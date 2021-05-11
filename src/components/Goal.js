@@ -1,10 +1,10 @@
 import React from 'react' 
-import { PieChart, Pie, Tooltip} from 'recharts';
+// import { PieChart, Pie, Tooltip} from 'recharts';
 
-const exercise = [
-  { name: 'days completed', value: 2 },
-  { name: 'remaining days', value: 5 }
-];
+// const exercise = [
+//   { name: 'days completed', value: 2 },
+//   { name: 'remaining days', value: 5 }
+// ];
 
 
 // const sleep = [
@@ -42,7 +42,7 @@ return (
     <li>{this.props.goal.name}</li>
     <button onClick={this.goalDone} className="action-button" >done</button>
     <button onClick={this.goalDelete} className="action-button" >delete</button>
-     <PieChart width={100} height={100}>
+     {/* <PieChart width={100} height={100}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
@@ -54,7 +54,7 @@ return (
             label
           />
           <Tooltip />
-        </PieChart>
+        </PieChart> */}
 </div>
 
 )

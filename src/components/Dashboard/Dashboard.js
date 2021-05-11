@@ -36,24 +36,60 @@ state = {
 }
 
 componentDidMount () {
-  fetch("http://localhost:3000/trips")
+  fetch("http://localhost:3000/trips",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({trips: data}))
 
-  fetch("http://localhost:3000/goals")
+  fetch("http://localhost:3000/goals",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({goals: data}))
 
-   fetch("http://localhost:3000/list_items")
+
+   fetch("http://localhost:3000/list_items",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({list: data}))
 
-   fetch("http://localhost:3000/finance_items")
+   fetch("http://localhost:3000/finance_items",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({finances: data}))
 
 
-   fetch("http://localhost:3000/appointments")
+   fetch("http://localhost:3000/appointments",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({appointments: data}))
 
@@ -72,7 +108,8 @@ fetch("http://localhost:3000/goals", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
-    'accept':'application/json'
+    'accept':'application/json',
+    "Authorization": `Bearer ${localStorage.token}`
   },
   body: JSON.stringify(newGoal)
 })
@@ -228,7 +265,8 @@ fetch("http://localhost:3000/list_items", {
   method: "POST", 
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    "Authorization": `Bearer ${localStorage.token}`
   },
   body: JSON.stringify(newTask)
 })
@@ -256,6 +294,47 @@ displayAppointments = () => {
   return showAppointments
 }
 
+
+taskDelete = () => {
+console.log('delete task')
+}
+
+goalDone = () => {
+    console.log('done')
+}
+
+goalDelete = () => {
+    console.log('delete goal')
+}
+
+appointmentEdit = () => {
+    console.log('edit appointment')
+}
+
+appointmentDelete = () => {
+    console.log('delete appointment')
+}
+
+financeEdit = () => {
+    console.log('edit expense')
+}
+
+financeDelete = () => {
+    console.log('delete expense')
+}
+
+tripEdit = () => {
+    console.log('edit trip')
+}
+
+tripDelete = () => {
+    console.log('delete trip')
+}
+
+
+
+
+
 searchAppointments = (e) => {
 this.setState({
   showAppointments: e.target.value
@@ -270,32 +349,32 @@ this.setState({
         <button className="button" onClick={this.allList}><h3>Todo List</h3></button>
         <button className="button" onClick={this.listForm}><h3>New task</h3></button>
         {this.state.listForm && <ListForm todoSubmit={this.todoSubmit}/>}
-        {this.state.allList && <Lists list={this.state.list}/>}
+        {this.state.allList && <Lists list={this.state.list} taskDelete={this.taskDelete}/>}
         <hr></hr>
         <h4>Calendar</h4>
         <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments}/>}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
-        {this.state.allAppt && <Calendars appointments={this.displayAppointments()}/>}
+        {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete}/>}
         <h4>Finances</h4>
         {/* <SearchForm searchFinances={this.searchFinances}/> */}
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
         {this.state.allFinance  && <SearchForm searchFinances={this.searchFinances}/>}
-        {this.state.allFinance  && <Finances finances={this.displayFinances()}/>}
+        {this.state.allFinance  && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete}/>}
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>
         <button className="button" onClick={this.tripForm}>Add a new trip</button>
         {this.state.tripForm &&  <TripForm tripSubmit={this.tripSubmit}/>}
-        {this.state.allTrips &&  <Trips trips={this.state.trips}/>}
+        {this.state.allTrips &&  <Trips trips={this.state.trips} tripDelete={this.tripDelete} tripEdit={this.tripEdit}/>}
         <hr></hr>
         <h4>Weekly Goals</h4>
         <button className="button" onClick={this.allGoals}><h3>My goals</h3></button>
         <button className="button" onClick={this.goalForm}><h3>Add new Goal</h3></button>
         {this.state.goalForm && <GoalForm listSubmit={this.listSubmit}/>}
-        {this.state.allGoals && <Goals goals={this.state.goals} />}
+        {this.state.allGoals && <Goals goals={this.state.goals} goalDone={this.goalDone} goalDelete={this.goalDelete}/>}
         <hr></hr>
       </div>
     )

@@ -6,7 +6,7 @@ const Finances = (props) => {
 
 return (
 <div>
-{props.finances.map(finance  => <Finance key={finance.id} finance={finance} displayFinances={props.displayFinances}/>)}
+{props.finances.map(finance  => <Finance key={finance.id} finance={finance} displayFinances={props.displayFinances} financeEdit={props.financeEdit} financeDelete={props.financeDelete}/>)}
 
 
 

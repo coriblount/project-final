@@ -6,7 +6,7 @@ const Lists = (props) => {
 
 return (
 <div>
-{props.list.map(item => <List key={item.id} item={item}/>)}
+{props.list.map(item => <List key={item.id} item={item} taskDelete={props.taskDelete} />)}
 </div>
 )
 

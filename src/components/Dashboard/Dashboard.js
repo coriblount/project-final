@@ -10,6 +10,8 @@ import FinanceForm from '../FinanceForm'
 import ListForm from '../ListForm'
 import CalendarForm from '../CalendarForm'
 import SearchForm from '../SearchForm'
+import SearchAppointments from '../SearchAppointments'
+
 
 class Dashboard extends React.Component {
 
@@ -29,8 +31,8 @@ state = {
   financeForm: false,
   allAppt: false,
   apptForm: false, 
-  sortedFinances: [],
-  showFinances: []
+  showFinances: [],
+  showAppointments: []
 }
 
 componentDidMount () {
@@ -249,6 +251,17 @@ this.setState({
 })
 }
 
+displayAppointments = () => {
+  const showAppointments = this.state.appointments.filter(appt => appt.name.toLowerCase().includes(this.state.showAppointments))
+  return showAppointments
+}
+
+searchAppointments = (e) => {
+this.setState({
+  showAppointments: e.target.value
+})
+}
+
   render(){
 
     return(
@@ -263,7 +276,8 @@ this.setState({
         <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
-        {this.state.allAppt && <Calendars appointments={this.state.appointments}/>}
+        {this.state.allAppt && <Calendars appointments={this.displayAppointments()}/>}
+        <SearchAppointments searchAppointments={this.searchAppointments}/>
         <h4>Finances</h4>
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>

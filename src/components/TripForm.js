@@ -13,7 +13,7 @@ render() {
 <br></br>
 <input type="text" name="destination" placeholder="destination"></input>
 <br></br>
-<button className="button" type="submit">Add Trip</button>
+<button className="action-button" type="submit">Add Trip</button>
 <br></br>
 </form>
         </div>

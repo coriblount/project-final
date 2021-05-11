@@ -1,12 +1,28 @@
 import React from 'react'
 
-const Finance = (props) => { 
-    return (
+class Finance extends React.Component { 
 
-    <div><ul><li>{props.finance.name}, {props.finance.amount}, {props.finance.month}</li></ul></div>
         
-        )
+financeEdit = () => {
+    console.log('clicked')
+}
 
+financeDelete = () => {
+    console.log('clicked')
+}
+
+
+render () {
+    return (
+         <div>
+        <li>{this.props.finance.name}, {this.props.finance.amount}, {this.props.finance.month}</li>
+        <button onClick={this.financeEdit} className="action-button" >edit</button>
+        <button onClick={this.financeDelete} className="action-button" >delete</button>
+    </div>
+    
+    )
+}
+    
 
 
 }

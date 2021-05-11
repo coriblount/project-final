@@ -9,11 +9,35 @@ import Information from '../Information/Information'
 
 function App() {
 
-  if (1 + 1 === 3) {
-    return <Login setToken={console.log()} />
+
+  const handleLogin = (e) =>{
+    e.preventDefault()
+    let user = {
+      name: e.target[0].value,
+      password: e.target[1].value
+    }
+
+    let reqPackage = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      },
+      body: JSON.stringify(user)
+    }
+
+
+    fetch('http://localhost:3000/login',reqPackage)
+    .then(res=>res.json())
+    .then(data=>{
+      localStorage.setItem("token", data.token)
+    })
   }
 
-
+  if (1+1===3) {
+    return <Login handleLogin={handleLogin} />
+  }
+  
   return (
     <div className="wrapper">
       <img src="https://finac.nl/wp-content/uploads/2020/09/ill-financiele-planning.png" alt="calendar" width="200" height="150"></img>

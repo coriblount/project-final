@@ -48,8 +48,7 @@ componentDidMount () {
 
    fetch("http://localhost:3000/finance_items")
   .then(resp => resp.json())
-  .then(data => this.setState({finances: data,
-  showFinances: data}))
+  .then(data => this.setState({finances: data}))
 
 
    fetch("http://localhost:3000/appointments")
@@ -238,10 +237,16 @@ fetch("http://localhost:3000/list_items", {
     )
 }
 
-searchFinances = (searchTerm) => {
-  this.setState({
-    showFinances: this.state.finances.filter(finance => finance.month.includes(searchTerm))
-  })
+displayFinances = () => {
+ const showFinances = this.state.finances.filter(finance => finance.month.toLowerCase().includes(this.state.showFinances))
+ return showFinances
+}
+
+
+searchFinances = (e) => {
+this.setState({
+  showFinances: e.target.value
+})
 }
 
   render(){
@@ -260,12 +265,12 @@ searchFinances = (searchTerm) => {
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
         {this.state.allAppt && <Calendars appointments={this.state.appointments}/>}
         <h4>Finances</h4>
-        <SearchForm searchFinances={this.searchFinances}/>
-        <br></br>
+        {/* <SearchForm searchFinances={this.searchFinances}/> */}
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
-        {this.state.allFinance && <Finances finances={this.state.finances}/>}
+        {this.state.allFinance  && <SearchForm searchFinances={this.searchFinances}/>}
+        {this.state.allFinance  && <Finances finances={this.displayFinances()}/>}
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>
         <button className="button" onClick={this.tripForm}>Add a new trip</button>

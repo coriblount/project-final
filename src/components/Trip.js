@@ -3,7 +3,10 @@ import React from 'react'
 const Trip = (props) => { 
     return (
 
-        <div><ul><li>{props.trip.name}, {props.trip.date}, {props.trip.destination}</li></ul></div>
+        <div><li>{props.trip.name}, {props.trip.date}, {props.trip.destination}</li>
+        <button className="action-button" >edit</button>
+        <button className="action-button" >delete</button>
+        </div>
         
         )
 

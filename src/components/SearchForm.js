@@ -5,9 +5,9 @@ const SearchForm = (props) => {
     <div className="ui large fluid icon input">
       <input
         type="text"
-        placeholder={"Search your Recent Transactions"}
+        placeholder={"Search by Month"}
         onChange={(e) => {
-          props.searchFinances(e.target.value)
+          props.searchFinances(e)
         }}
       />
       <i className="circular search link icon"></i>

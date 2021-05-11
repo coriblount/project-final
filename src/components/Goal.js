@@ -22,7 +22,11 @@ const exercise = [
 class Goal extends React.Component { 
     
     
-handleDone = () => {
+goalDone = () => {
+    console.log('clicked')
+}
+
+goalDelete = () => {
     console.log('clicked')
 }
 
@@ -36,8 +40,8 @@ return (
 
 <div>
     <li>{this.props.goal.name}</li>
-    <button onClick={this.handleDone} className="action-button" >done</button>
-    <button className="action-button" >delete</button>
+    <button onClick={this.goalDone} className="action-button" >done</button>
+    <button onClick={this.goalDelete} className="action-button" >delete</button>
      <PieChart width={100} height={100}>
           <Pie
             dataKey="value"

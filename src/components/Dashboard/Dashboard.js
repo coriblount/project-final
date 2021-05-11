@@ -31,25 +31,60 @@ state = {
 }
 
 componentDidMount () {
-  fetch("http://localhost:3000/trips")
+  fetch("http://localhost:3000/trips",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({trips: data}))
 
-  fetch("http://localhost:3000/goals")
+  fetch("http://localhost:3000/goals",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({goals: data}))
 
 
-   fetch("http://localhost:3000/list_items")
+   fetch("http://localhost:3000/list_items",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({list: data}))
 
-   fetch("http://localhost:3000/finance_items")
+   fetch("http://localhost:3000/finance_items",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({finances: data}))
 
 
-   fetch("http://localhost:3000/appointments")
+   fetch("http://localhost:3000/appointments",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
   .then(resp => resp.json())
   .then(data => this.setState({appointments: data}))
 
@@ -68,7 +103,8 @@ fetch("http://localhost:3000/goals/", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
-    'accept':'application/json'
+    'accept':'application/json',
+    "Authorization": `Bearer ${localStorage.token}`
   },
   body: JSON.stringify(newGoal)
 })

@@ -5,7 +5,7 @@ const SearchAppointments = (props) => {
         <div className="ui large fluid icon input">
           <input
             type="text"
-            placeholder={"Search your Recent Transactions"}
+            placeholder={"Search Appointment"}
             onChange={(e) => {
               props.searchAppointments(e)
             }}

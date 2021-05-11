@@ -275,9 +275,9 @@ this.setState({
         <h4>Calendar</h4>
         <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
+        {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments}/>}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()}/>}
-        <SearchAppointments searchAppointments={this.searchAppointments}/>
         <h4>Finances</h4>
         {/* <SearchForm searchFinances={this.searchFinances}/> */}
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>

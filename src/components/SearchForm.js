@@ -7,7 +7,7 @@ const SearchForm = (props) => {
         type="text"
         placeholder={"Search your Recent Transactions"}
         onChange={(e) => {
-          props.searchFinances(e.target.value)
+          props.searchFinances(e)
         }}
       />
       <i className="circular search link icon"></i>

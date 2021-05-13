@@ -121,7 +121,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/dashboard">
-              <Dashboard />
+              <Dashboard currentUser={this.state.currentUser}/>
             </Route>
             {/* <Route path="/preferences">
             <Preferences />

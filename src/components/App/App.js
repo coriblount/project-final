@@ -16,49 +16,6 @@ class App extends React.Component {
     currentUser: ''
   }
 
-  //testing purposes
-
-  //testing purposesy
-  
-  user = {
-    name: 'Udenna',
-    username: 'udenna',
-    password: 'udenna'
-  }
-
-  async componentDidMount() {
-
-    // try {
-
-    //   let res = await fetch('http://localhost:3000/api/v1/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-type': 'application/json',
-    //       "Authorization": `Bearer ${localStorage.token}`
-    //     },
-    //     body: JSON.stringify(this.user)
-    //   })
-    //   let result = await res.json()
-
-    //   if (result && result.success) {
-    //     UserStore.loading = false
-    //     UserStore.isLoggedIn = true
-    //     UserStore.username = result.username
-    //   }
-    //   else {
-    //     UserStore.loading = false
-    //     UserStore.isLoggedIn = false
-    //   }
-    // }
-    // catch (e) {
-
-    //   UserStore.loading = false
-    //   UserStore.isLoggedIn = false
-    //   console.log(e) //for debugging errors from the api
-    // }
-  }
-
   handleLogin = (e) => {
     e.preventDefault()
     // debugger
@@ -76,34 +33,7 @@ class App extends React.Component {
           currentUser: data.find(user => user.name === loggedInUser.name)
         })
       })
-
-    // let user = {
-    //   name: e.target[0].value,
-    //   password: e.target[1].value
-    // }
-
-    // let reqPackage = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //   },
-    //   body: JSON.stringify(user)
-    // }
-
-
-    // fetch('http://localhost:3000/api/v1/login', reqPackage)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     localStorage.setItem("token", data.token)
-    //   })
-
-    // this.setState({ loggedIn: true })
-
   }
-
-
-  
 
   render() {
     if (this.state.currentUser === '') {
@@ -125,7 +55,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/dashboard">
-              <Dashboard currentUser={this.state.currentUser}/>
+              <Dashboard currentUser={this.state.currentUser} />
             </Route>
             {/* <Route path="/preferences">
             <Preferences />

@@ -35,6 +35,12 @@ class App extends React.Component {
       })
   }
 
+handleLogout = (e) => {
+e.preventDefault()
+window.location.href = "/login";
+}
+
+
   render() {
     if (this.state.currentUser === '') {
       return <Login handleLogin={this.handleLogin} />
@@ -66,7 +72,7 @@ class App extends React.Component {
           </Switch>
           <br></br>
           <br></br>
-          <button className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
+          <button onClick={this.handleLogout} className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
         </BrowserRouter>
       </div>
     );

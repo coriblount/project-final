@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.currentUser)
+    console.log(this.props.currentUser)
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
       .then(res => res.json())
       .then(user =>{
@@ -48,7 +48,6 @@ class Dashboard extends React.Component {
           list: user.list_items,
           finances: user.finance_items,
           appointments: user.appointments
-
         })
       })
 

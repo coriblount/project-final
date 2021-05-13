@@ -11,6 +11,8 @@ import ListForm from '../ListForm'
 import CalendarForm from '../CalendarForm'
 import SearchForm from '../SearchForm'
 import SearchAppointments from '../SearchAppointments'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 
 class Dashboard extends React.Component {
@@ -387,6 +389,7 @@ this.setState({
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments}/>}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
+        {this.state.allAppt && <Calendar />}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete}/>}
 
         <h4>Finances</h4>
@@ -401,12 +404,15 @@ this.setState({
         <button className="button" onClick={this.tripForm}>Add a new trip</button>
         {this.state.tripForm &&  <TripForm tripSubmit={this.tripSubmit}/>}
         {this.state.allTrips &&  <Trips trips={this.state.trips} tripDelete={this.tripDelete} tripEdit={this.tripEdit}/>}
-    
+        <br></br>
+        <button className="button"><a id="link" href='https://upgradedpoints.com/wp-content/uploads/2018/10/Printable-Travel-Packing-List.pdf'><h3>My packing list</h3></a></button>
+        <br></br>
+
         <h4>Weekly Goals</h4>
         <button className="button" onClick={this.allGoals}><h3>My goals</h3></button>
         <button className="button" onClick={this.goalForm}><h3>Add new Goal</h3></button>
         {this.state.goalForm && <GoalForm listSubmit={this.listSubmit}/>}
-        {this.state.allGoals && <Goals goals={this.state.goals} goalDone={this.goalDone} goalDelete={this.goalDelete}/>}
+        {this.state.allGoals && <Goals goals={this.state.goals} handleGoal={this.handleGoal} handleReset={this.handleReset} goalDelete={this.goalDelete}/>}
        <br></br>
       </div>
     )

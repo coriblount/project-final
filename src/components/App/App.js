@@ -1,5 +1,5 @@
 import React from 'react';
-import UserStore from '../../stores/UserStore'
+// import UserStore from '../../stores/UserStore'
 // import { observer } from 'mobx-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -61,24 +61,6 @@ class App extends React.Component {
 
   handleLogin = (e) => {
     e.preventDefault()
-<<<<<<< HEAD
-    // let user = {
-    //   name: e.target[0].value,
-    //   password: e.target[1].value
-    // }
-
-    let reqPackage = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(this.user)
-    }
-
-
-    fetch('http://localhost:3000/api/v1/login', reqPackage)
-=======
     // debugger
     let loggedInUser = {
       name: e.target[0].value,
@@ -86,7 +68,6 @@ class App extends React.Component {
     }
 
     fetch('http://localhost:3000/api/v1/users')
->>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
       .then(res => res.json())
       .then(data => {
         // debugger
@@ -125,11 +106,7 @@ class App extends React.Component {
   
 
   render() {
-<<<<<<< HEAD
-    if (!UserStore.isLoggedIn) {
-=======
     if (this.state.currentUser === '') {
->>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
       return <Login handleLogin={this.handleLogin} />
     }
     return (
@@ -167,4 +144,4 @@ class App extends React.Component {
 }
 
 
-export default observer(App);
+export default App;

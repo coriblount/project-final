@@ -1,17 +1,16 @@
+
 import React from 'react'
 
-class Calendar extends React.Component {
-
-
-    render() {
-        return (
-     <div>
-    <li>{this.props.appointment.name}, {this.props.appointment.date}, {this.props.appointment.time}</li>
+const Calendar = (props) => { 
+return(
+    <div>
+    <li className="card" >{props.appointment.name}, {props.appointment.date}, {props.appointment.time}</li>
     <button onClick={this.props.appointmentEdit} className="action-button" >edit</button>
     <button onClick={this.props.appointmentDelete} className="action-button" >delete</button>
-    </div>
-        )
-    }
+    </div>)
+
+
 }
+
 
 export default Calendar 

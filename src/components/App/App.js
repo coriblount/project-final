@@ -3,11 +3,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login'
-import Logout from '../Login/Logout'
+// import Logout from '../Login/Logout'
 import Information from '../Information/Information'
 // import Preferences from '../Preferences/Preferences';
 
 class App extends React.Component {
+
+
+  state = {time: new Date().toLocaleString()}
+
 
   handleLogin = (e) => {
     e.preventDefault()
@@ -39,34 +43,38 @@ class App extends React.Component {
       return <Login handleLogin={this.handleLogin} />
     }
     return (
-      <div className="wrapper">
-        <img src="https://finac.nl/wp-content/uploads/2020/09/ill-financiele-planning.png" alt="calendar" width="200" height="150"></img>
-        <h1>My Planner</h1>
-        <h2>Logged in: {}</h2>
-        <button className="button"><a id="link" href='./dashboard'><h3>Dashboard</h3></a></button>
-        <br></br>
-        <button className="button"><a id="link" href='./information'><h3>My Information</h3></a></button>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            {/* <Route path="/preferences">
-              <Preferences />
-            </Route> */}
-            <Route path="/information">
-              <Information />
-            </Route>
-            <Route path="/logout">
-              <Logout />
-            </Route>
-          </Switch>
-          <br></br>
-          <button className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
-        </BrowserRouter>
+    <div className="wrapper">
+      <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
+      {/* <h1>My Planner</h1> */}
+      <div className="date">
+        <p>
+           {this.state.time}
+        </p>
       </div>
-    )
+      <button className="button"><a id="link" href='./dashboard'><h3>Dashboard</h3></a></button>
+      <br></br>
+      <br></br>
+      <button className="button"><a id="link" href='./information'><h3>My Information  </h3></a></button>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          {/* <Route path="/preferences">
+            <Preferences />
+          </Route> */}
+          <Route path="/information">
+          <Information />
+          </Route>
+        </Switch>
+        <br></br>
+        <br></br>
+        <button className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
+      </BrowserRouter>
+    </div>
+  );
   }
 }
+
 
 export default App;

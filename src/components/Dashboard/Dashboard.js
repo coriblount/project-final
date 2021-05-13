@@ -36,14 +36,14 @@ state = {
 }
 
 componentDidMount () {
-  fetch("http://localhost:3000/trips",{
-    method: "GET",
-    headers: {
-      "Content-Type":"application/json",
-      "Accept":"application/json",
-      "Authorization": `Bearer ${localStorage.token}`
-    }
-  })
+  fetch("http://localhost:3000/trips")
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type":"application/json",
+  //     "Accept":"application/json",
+  //     "Authorization": `Bearer ${localStorage.token}`
+  //   }
+  // })
   .then(resp => resp.json())
   .then(data => this.setState({trips: data}))
 
@@ -253,28 +253,61 @@ this.setState({apptForm: !this.state.apptForm})
 }
 
 
+apptForm = () => {
+this.setState({apptForm: !this.state.apptForm})
+}
+
 todoSubmit = (e) => {
   e.preventDefault()
 // console.log(e)
 
 let newTask = {name: e.target[0].value}
-// console.log(newTask)
+console.log(newTask)
 
 fetch("http://localhost:3000/list_items", {
   method: "POST", 
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    "Authorization": `Bearer ${localStorage.token}`
+    'Accept': 'application/json'
   },
   body: JSON.stringify(newTask)
 })
 .then(resp => resp.json())
-.then(newTodo => console.log(newTodo)
-  // this.setState
-  //   ({list: newTodo})
-    )
+.then(newTodo => this.setState({list: [...this.state.list, newTodo]})
+)
+e.target.reset();
 }
+
+handleGoal = (goal) => {
+  fetch(`http://localhost:3000/goals/${goal.id}`, {
+    method: "PATCH", 
+    headers: {
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify({start: goal.start})
+  })
+  .then(resp=>resp.json())
+  .then(numberGoal => this.setState ({
+    goals: this.state.goals.map(goal => goal.id === numberGoal.id ? numberGoal : goal)
+  }))
+}
+
+handleReset = (goal) => {
+  fetch(`http://localhost:3000/goals/${goal.id}`, {
+    method: "PATCH", 
+    headers: {
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify({start: goal.start -7})
+  })
+  .then(resp=>resp.json())
+  .then(numberGoal => this.setState ({
+    goals: this.state.goals.map(goal => goal.id === numberGoal.id ? numberGoal : goal)
+  }))
+}
+
 
 displayFinances = () => {
  const showFinances = this.state.finances.filter(finance => finance.month.toLowerCase().includes(this.state.showFinances))
@@ -336,6 +369,9 @@ this.setState({
 })
 }
 
+
+
+
   render(){
 
     return(
@@ -345,32 +381,33 @@ this.setState({
         <button className="button" onClick={this.listForm}><h3>New task</h3></button>
         {this.state.listForm && <ListForm todoSubmit={this.todoSubmit}/>}
         {this.state.allList && <Lists list={this.state.list} taskDelete={this.taskDelete}/>}
-        <hr></hr>
+    
         <h4>Calendar</h4>
         <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments}/>}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment}/>}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete}/>}
+
         <h4>Finances</h4>
-        {/* <SearchForm searchFinances={this.searchFinances}/> */}
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
         {this.state.allFinance  && <SearchForm searchFinances={this.searchFinances}/>}
         {this.state.allFinance  && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete}/>}
+
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>
         <button className="button" onClick={this.tripForm}>Add a new trip</button>
         {this.state.tripForm &&  <TripForm tripSubmit={this.tripSubmit}/>}
         {this.state.allTrips &&  <Trips trips={this.state.trips} tripDelete={this.tripDelete} tripEdit={this.tripEdit}/>}
-        <hr></hr>
+    
         <h4>Weekly Goals</h4>
         <button className="button" onClick={this.allGoals}><h3>My goals</h3></button>
         <button className="button" onClick={this.goalForm}><h3>Add new Goal</h3></button>
         {this.state.goalForm && <GoalForm listSubmit={this.listSubmit}/>}
         {this.state.allGoals && <Goals goals={this.state.goals} goalDone={this.goalDone} goalDelete={this.goalDelete}/>}
-        <hr></hr>
+       <br></br>
       </div>
     )
   }

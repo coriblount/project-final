@@ -2,27 +2,61 @@
 
 
 body {
-    /* background: url("") no-repeat center center fixed;  */
+    background: url("https://i.ibb.co/52DhPHT/background.png") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  
+    margin:50px 0; 
+    padding:0;
+    text-align:center;
 }
 
 h1 {
     font-size: 3rem;
-    color: rgb(3, 5, 22);
+    color: rgb(255, 255, 255);
     text-align: inline;
     /* background: rgb(255, 255, 255); */
     margin-bottom: 5rem;
 }
 
 h4 {
+    font-size: 0.8rem;
+    color: rgb(255, 255, 255);
+    text-align: inline;
+    /* background: rgb(1, 15, 44); */
+    border: none
+}
+
+li {
     font-size: 1rem;
     color: rgb(255, 255, 255);
     text-align: inline;
-    background: rgb(1, 15, 44);
+    border: none;
+}
+
+.li {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: inline;
+    /* background: rgb(1, 15, 44); */
+    border: none
+}
+
+.lidone {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: inline;
+    /* background: rgb(1, 15, 44); */
+    border: none;
+    text-decoration:line-through;
+}
+
+.date {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: inline;
+    /* background: rgb(1, 15, 44); */
     border: none
 }
 
@@ -33,11 +67,13 @@ h4 {
 .action-button {
   font-size: 0.6rem;
   height: 1.2rem;
-  text-align: inline;
-  color: rgb(253, 253, 253);
-  background: rgb(0, 1, 56);
+  text-align: center; 
+  line-height: 0rem;
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   border-radius: 25px;
-  border: none
+  border: none; 
+  cursor: pointer;
 }
 
 .action-button:hover {
@@ -47,20 +83,40 @@ h4 {
   transform: scale(1.05);
 }
 
+.action-buttongone {
+  font-size: 0rem;
+  border: none;
+  background: rgb(26, 24, 24);
+}
+
 .button {
   font-size: 0.6rem;
   height: 2.3rem;
   text-align: center; 
   line-height: 0rem;
-  color: rgb(255, 255, 255);
-  background: rgb(19, 155, 218);
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   border-radius: 25px;
-  border: none;
-  cursor:pointer;
+  border: none; 
+  cursor: pointer;
 }
+.button:hover { color: rgb(1, 68, 62); } 
 
-button:hover { color: rgb(119, 240, 230); } 
-
-#link { color: #ffffff; 
+#link { color: #000000; 
 text-decoration: none;} 
-#link:hover { color: rgb(119, 240, 230); } 
+#link:hover { color: rgb(1, 68, 62); } 
+
+
+  .card {
+    font-size: 0.6rem;
+  background-color: #ffffff;
+  color: rgb(26, 21, 21);
+  width: 40%;
+  padding: 1rem;
+  width: 15rem;
+  /* height: 0.6rem; */
+  display: inline-grid;
+  margin: 0.5rem 2rem;
+  border:  #000000;
+  border-radius: 8px;
+}

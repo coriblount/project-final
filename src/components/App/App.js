@@ -1,6 +1,6 @@
 import React from 'react';
 import UserStore from '../../stores/UserStore'
-import { observer } from 'mobx-react'
+// import { observer } from 'mobx-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
@@ -11,10 +11,10 @@ import Information from '../Information/Information'
 
 class App extends React.Component {
 
-  state = {time: new Date().toLocaleString()}
+    state = {time: new Date().toLocaleString()}
 
-  //testing purposes
-
+  //testing purposesy
+  
   user = {
     name: 'Udenna',
     username: 'udenna',

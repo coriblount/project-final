@@ -281,7 +281,7 @@ e.target.reset();
 }
 
 handleGoal = (goal) => {
-  fetch(`http://localhost:3000/goals/${goal.id}`, {
+  fetch(`http://localhost:3000/api/v1/goals${goal.id}`, {
     method: "PATCH", 
     headers: {
       'content-type': 'application/json',
@@ -296,7 +296,7 @@ handleGoal = (goal) => {
 }
 
 handleReset = (goal) => {
-  fetch(`http://localhost:3000/goals/${goal.id}`, {
+  fetch(`http://localhost:3000/api/v1/goals${goal.id}`, {
     method: "PATCH", 
     headers: {
       'content-type': 'application/json',

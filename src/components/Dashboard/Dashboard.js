@@ -17,6 +17,51 @@ import 'react-calendar/dist/Calendar.css';
 
 class Dashboard extends React.Component {
 
+<<<<<<< HEAD
+state = {
+  trips: [],
+  goals: [],
+  list: [], 
+  finances: [], 
+  appointments: [],
+  allGoals: false,
+  goalForm: false,
+  allTrips: false,
+  tripForm: false,
+  allList: false,
+  listForm: false,
+  allFinance: false,
+  financeForm: false,
+  allAppt: false,
+  apptForm: false, 
+  showFinances: [],
+  showAppointments: [],
+  financeArr: []
+}
+
+componentDidMount () {
+  fetch("http://localhost:3000/api/v1/trips",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
+  .then(resp => resp.json())
+  .then(data => this.setState({trips: data}))
+
+  fetch("http://localhost:3000/api/v1/goals",{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      "Authorization": `Bearer ${localStorage.token}`
+    }
+  })
+  .then(resp => resp.json())
+  .then(data => this.setState({goals: data}))
+=======
   state = {
     trips: [],
     goals: [],
@@ -36,6 +81,7 @@ class Dashboard extends React.Component {
     showFinances: [],
     showAppointments: []
   }
+>>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
 
   componentDidMount() {
     // console.log(this.props.currentUser)
@@ -309,7 +355,15 @@ class Dashboard extends React.Component {
     console.log('edit expense')
   }
 
+<<<<<<< HEAD
+financeAddRecurringExpense = () => {
+  console.log('add recurring expense')
+}
+
+financeDelete = () => {
+=======
   financeDelete = () => {
+>>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
     console.log('delete expense')
   }
 
@@ -319,7 +373,29 @@ class Dashboard extends React.Component {
 
   tripDelete = () => {
     console.log('delete trip')
+<<<<<<< HEAD
+}
+
+searchAppointments = (e) => {
+this.setState({
+  showAppointments: e.target.value
+})
+}
+
+toggleRecurringExpenses = (finance) => {
+this.setState( finances => {
+  const financeArr = finances.financeArr.includes(finance) ? financeArr.filter( obj => obj !== finance) :
+  [...financeArr, finance]
+  return {
+    financeArr
   }
+}
+
+)
+}
+=======
+  }
+>>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
 
   searchAppointments = (e) => {
     this.setState({
@@ -348,9 +424,18 @@ class Dashboard extends React.Component {
         <h4>Finances</h4>
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
+<<<<<<< HEAD
+        {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
+        {this.state.allFinance  && <SearchForm searchFinances={this.searchFinances}/>}
+        {this.state.allFinance  && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete} financeAddRecurringExpense={this.financeAddRecurringExpense}/>}
+
+
+
+=======
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense} />}
         {this.state.allFinance && <SearchForm searchFinances={this.searchFinances} />}
         {this.state.allFinance && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete} />}
+>>>>>>> f3a29ec630598aedda5d10cf20cb7a678c1045c9
 
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>

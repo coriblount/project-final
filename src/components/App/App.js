@@ -56,10 +56,10 @@ class App extends React.Component {
 
   handleLogin = (e) => {
     e.preventDefault()
-    let user = {
-      name: e.target[0].value,
-      password: e.target[1].value
-    }
+    // let user = {
+    //   name: e.target[0].value,
+    //   password: e.target[1].value
+    // }
 
     let reqPackage = {
       method: 'POST',
@@ -67,7 +67,7 @@ class App extends React.Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(this.user)
     }
 
 
@@ -81,8 +81,10 @@ class App extends React.Component {
   }
 
 
+  
+
   render() {
-    if (UserStore.isLoggedIn) {
+    if (!UserStore.isLoggedIn) {
       return <Login handleLogin={this.handleLogin} />
     }
     return (
@@ -120,4 +122,4 @@ class App extends React.Component {
 }
 
 
-export default App;
+export default observer(App);

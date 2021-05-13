@@ -32,7 +32,8 @@ state = {
   allAppt: false,
   apptForm: false, 
   showFinances: [],
-  showAppointments: []
+  showAppointments: [],
+  financeArr: []
 }
 
 componentDidMount () {
@@ -351,6 +352,10 @@ financeEdit = () => {
     console.log('edit expense')
 }
 
+financeAddRecurringExpense = () => {
+  console.log('add recurring expense')
+}
+
 financeDelete = () => {
     console.log('delete expense')
 }
@@ -369,7 +374,17 @@ this.setState({
 })
 }
 
+toggleRecurringExpenses = (finance) => {
+this.setState( finances => {
+  const financeArr = finances.financeArr.includes(finance) ? financeArr.filter( obj => obj !== finance) :
+  [...financeArr, finance]
+  return {
+    financeArr
+  }
+}
 
+)
+}
 
 
   render(){
@@ -394,7 +409,10 @@ this.setState({
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense}/>}
         {this.state.allFinance  && <SearchForm searchFinances={this.searchFinances}/>}
-        {this.state.allFinance  && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete}/>}
+        {this.state.allFinance  && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete} financeAddRecurringExpense={this.financeAddRecurringExpense}/>}
+
+
+
 
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>

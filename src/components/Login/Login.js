@@ -1,15 +1,14 @@
 import React from 'react';
-// import { Component } from 'react';
 import './Login.css';
 
 export default function Login(props) {
 
 
-
   return (
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={props.handleSubmit}>
+      <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
+      <p>Please Log In</p>
+      <form onSubmit={props.handleLogin}>
         <label>
           <p>Username</p>
           <input type="text" onChange={console.log()} />

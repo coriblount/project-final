@@ -36,7 +36,7 @@ state = {
 }
 
 componentDidMount () {
-  fetch("http://localhost:3000/trips",{
+  fetch("http://localhost:3000/api/v1/trips",{
     method: "GET",
     headers: {
       "Content-Type":"application/json",
@@ -47,7 +47,7 @@ componentDidMount () {
   .then(resp => resp.json())
   .then(data => this.setState({trips: data}))
 
-  fetch("http://localhost:3000/goals",{
+  fetch("http://localhost:3000/api/v1/goals",{
     method: "GET",
     headers: {
       "Content-Type":"application/json",
@@ -59,7 +59,7 @@ componentDidMount () {
   .then(data => this.setState({goals: data}))
 
 
-   fetch("http://localhost:3000/list_items",{
+   fetch("http://localhost:3000/api/v1/list_items",{
     method: "GET",
     headers: {
       "Content-Type":"application/json",
@@ -70,7 +70,7 @@ componentDidMount () {
   .then(resp => resp.json())
   .then(data => this.setState({list: data}))
 
-   fetch("http://localhost:3000/finance_items",{
+   fetch("http://localhost:3000/api/v1/finance_items",{
     method: "GET",
     headers: {
       "Content-Type":"application/json",
@@ -82,7 +82,7 @@ componentDidMount () {
   .then(data => this.setState({finances: data}))
 
 
-   fetch("http://localhost:3000/appointments",{
+   fetch("http://localhost:3000/api/v1/appointments",{
     method: "GET",
     headers: {
       "Content-Type":"application/json",
@@ -104,7 +104,7 @@ let newGoal = {
   "completion_date": e.target[2].value
 }
 // console.log(newGoal)
-fetch("http://localhost:3000/goals", {
+fetch("http://localhost:3000/api/v1/goals", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
@@ -132,7 +132,7 @@ tripSubmit = (e) =>{
     "destination" : newDestination
   }
 // console.log(newTrip)
-fetch("http://localhost:3000/trips/", {
+fetch("http://localhost:3000/api/v1/trips/", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
@@ -162,7 +162,7 @@ time: e.target[2].value
 
 // console.log(newAppointment)
 
-fetch("http://localhost:3000/appointments/", {
+fetch("http://localhost:3000/api/v1/appointments/", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
@@ -192,7 +192,7 @@ month: e.target[2].value
 
 // console.log(newExpense)
 
-fetch("http://localhost:3000/finance_items", {
+fetch("http://localhost:3000/api/v1/finance_items", {
   method: "POST", 
   headers: {
     'content-type': 'application/json',
@@ -260,7 +260,7 @@ todoSubmit = (e) => {
 let newTask = {name: e.target[0].value}
 // console.log(newTask)
 
-fetch("http://localhost:3000/list_items", {
+fetch("http://localhost:3000/api/v1/list_items", {
   method: "POST", 
   headers: {
     'Content-Type': 'application/json',

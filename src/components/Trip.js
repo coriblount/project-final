@@ -14,5 +14,4 @@ const Trip = (props) => {
 
 }
 
-
 export default Trip

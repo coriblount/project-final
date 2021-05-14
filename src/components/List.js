@@ -14,6 +14,8 @@ class List extends React.Component {
         this.setState({isActive: true}) ;
         this.setState({buttonActive: false})
     }
+
+
     
     render() {
         const toggle = this.state.isActive ? 'lidone' : 'li';
@@ -24,7 +26,7 @@ class List extends React.Component {
 <div>
     <li className= {`${toggle}` } >{this.props.item.name}</li>
     <button className={`${button}` } onClick={this.handleDone}>done</button>
-    <button onClick={this.props.taskDelete} className="action-button" >delete</button>
+    <button onClick={() => this.props.taskDelete(this.props.item)} className="action-button" >delete</button>
 </div>
 
 )

@@ -71,11 +71,12 @@ class Dashboard extends React.Component {
       body: JSON.stringify(newGoal)
     })
       .then(resp => resp.json())
-      .then(newGoal => console.log(newGoal))
-    //   this.setState({
-    //   goals: [...this.state.goals, newGoal]
-    // })
-  }
+      .then(newGoal => 
+      this.setState({
+      goals: [...this.state.goals, newGoal]
+    })
+      )}
+
 
   tripSubmit = (e) => {
     e.preventDefault()
@@ -98,10 +99,10 @@ class Dashboard extends React.Component {
       body: JSON.stringify(newTrip)
     })
       .then(resp => resp.json())
-      .then(newTrip => console.log(newTrip))
-    //    this.setState({
-    //   trips: [...this.state.trips, newTrip]
-    // }))
+      .then(newTrip => 
+       this.setState({
+      trips: [...this.state.trips, newTrip]
+    }))
   }
 
   handleAppointment = (e) => {
@@ -128,10 +129,10 @@ class Dashboard extends React.Component {
       body: JSON.stringify(newAppointment)
     })
       .then(resp => resp.json())
-      .then(newAppt => console.log(newAppt))
-    //   this.setState({
-    //   appointments: [...this.state.appointments, newAppointment]
-    // }))
+      .then(newAppt => 
+      this.setState({
+      appointments: [...this.state.appointments, newAppointment]
+    }))
   }
 
   submitExpense = (e) => {
@@ -158,10 +159,10 @@ class Dashboard extends React.Component {
       body: JSON.stringify(newExpense)
     })
       .then(resp => resp.json())
-      .then(newExpense => console.log(newExpense))
-    //   this.setState({
-    //   appointments: [...this.state.appointments, newAppointment]
-    // }))
+      .then(newExpense => 
+      this.setState({
+      finances: [...this.state.finances, newExpense]
+    }))
   }
 
 
@@ -216,9 +217,9 @@ class Dashboard extends React.Component {
 
   todoSubmit = (e) => {
     e.preventDefault()
-    // console.log(e)
-
-    let newTask = { name: e.target[0].value }
+    
+    
+    let newTask = { name: e.target.name.value, user_id: this.props.currentUser.id}
     console.log(newTask)
 
     fetch("http://localhost:3000/api/v1/list_items", {
@@ -286,7 +287,7 @@ class Dashboard extends React.Component {
 
   taskDelete = (list) => {
     console.log('delete task')
-    fetch(`http://localhost:3000/api/v1/list_items${list.id}`,{
+    fetch(`http://localhost:3000/api/v1/list_items/${list.id}`,{
       method: 'DELETE'
     })
     this.setState({
@@ -324,6 +325,8 @@ class Dashboard extends React.Component {
 
   financeEdit = () => {
     console.log('edit expense')
+
+
   }
 
   financeDelete = (finances) => {
@@ -336,10 +339,19 @@ class Dashboard extends React.Component {
     })
   }
 
-  tripEdit = () => {
-    console.log('edit trip')
-
-  }
+//   tripEdit = (trip) => {
+//     console.log('edit trip')
+//     fetch(`http://localhost:3000/api/v1/trips/${trip.id}`, {
+//       method: 'PATCH',
+//     headers: {
+//       'content-type': 'application/json',
+//       'accept': 'application/json'
+//     },
+//     body: JSON.stringify(trip)
+//   })
+//   .then(res => res.json())
+//   .then(trip => )
+// }
 
   tripDelete = (trip) => {
     console.log('delete trip')
@@ -357,7 +369,10 @@ class Dashboard extends React.Component {
     })
   }
 
+
   render() {
+
+  
 
     return (
       <div>
@@ -372,7 +387,7 @@ class Dashboard extends React.Component {
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments} />}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment} />}
-        {this.state.allAppt && <Calendar />}
+        {this.state.allAppt && <Calendar style={{margin: "align-center"}}/>}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete} />}
 
         <h4>Finances</h4>

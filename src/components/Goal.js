@@ -1,13 +1,12 @@
 
-
 import React from 'react' 
-// import { PieChart, Pie, Tooltip} from 'recharts';
+import { PieChart, Pie, Tooltip} from 'recharts';
 
 
 // const sleep = [
-  //   { name: 'done', value: 1 },
-  //   { name: 'remaining', value: 6 }
-  // ]; 
+//     { name: 'done', value: 1 },
+//     { name: 'remaining', value: 6 }
+//   ]; 
   
   
   // const water = [
@@ -15,10 +14,7 @@ import React from 'react'
     //   { name: 'remaining', value: 3 }
     // ];
     
-    // const exercise = [
-    //   { name: 'days completed', value: 1 },
-    //   { name: 'remaining days', value: 6 }
-    // ];
+
 
 class Goal extends React.Component { 
 
@@ -47,8 +43,13 @@ handleReset = () => {
 }
 
 
-render() {
+render(){
+  const goal = [
+    { name: 'days completed', value: this.props.goal.completion },
+    { name: 'remaining days', value: this.props.goal.start}
+  ];
 
+console.log(this.props.goal)
 return (
 
 <div>
@@ -59,11 +60,25 @@ return (
     <button onClick={this.handleReset} className="action-button" >reset</button>
      <br></br>
         <br></br>
-     {/* <PieChart width={100} height={100}>
+     <PieChart style={{margin: "auto"}} width={100} height={100}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
-            data={exercise}
+            data={goal}
+            cx="50%"
+            cy="50%"
+            outerRadius={30}
+            fill="#808080"
+            label
+          />
+          <Tooltip />
+        </PieChart>
+{/* 
+        <PieChart width={100} height={100}>
+          <Pie
+            dataKey="value"
+            isAnimationActive={true}
+            data={sleep}
             cx="50%"
             cy="50%"
             outerRadius={30}

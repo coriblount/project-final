@@ -6,7 +6,7 @@ render() {
     return (
         <div>
             
-<form onSubmit={this.props.todoSubmit}>
+<form onSubmit={(e) => this.props.todoSubmit(e)}>
 <input type="text" name="name" placeholder="task"></input>
 <br></br>
 <button className="action-button" type="submit">Add Task</button>

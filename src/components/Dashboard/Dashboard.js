@@ -284,40 +284,70 @@ class Dashboard extends React.Component {
   }
 
 
-  taskDelete = () => {
+  taskDelete = (list) => {
     console.log('delete task')
+    fetch(`http://localhost:3000/api/v1/list_items${list.id}`,{
+      method: 'DELETE'
+    })
+    this.setState({
+      list: this.state.list.filter((obj) => {return obj !== list})
+    })
   }
 
   goalDone = () => {
     console.log('done')
   }
 
-  goalDelete = () => {
+  goalDelete = (goal) => {
     console.log('delete goal')
+    fetch(`http://localhost:3000/goals/${goal.id}`,{
+      method: 'DELETE'
+    })
+    this.setState({
+      goals: this.state.goals.filter((obj) => {return obj !== goal})
+    })
   }
 
   appointmentEdit = () => {
     console.log('edit appointment')
   }
 
-  appointmentDelete = () => {
+  appointmentDelete = (appointments) => {
     console.log('delete appointment')
+    fetch(`http://localhost:3000/api/v1/appointments/${appointments.id}`,{
+      method: 'DELETE'
+    })
+    this.setState({
+      appointments: this.state.appointments.filter((obj) => {return obj !== appointments})
+    })
   }
 
   financeEdit = () => {
     console.log('edit expense')
   }
 
-  financeDelete = () => {
+  financeDelete = (finances) => {
     console.log('delete expense')
+    fetch(`http://localhost:3000/api/v1/finance_items/${finances.id}`,{
+      method: 'DELETE'
+    })
+    this.setState({
+      finances: this.state.finances.filter((obj) => {return obj !== finances})
+    })
   }
 
   tripEdit = () => {
     console.log('edit trip')
   }
 
-  tripDelete = () => {
+  tripDelete = (trip) => {
     console.log('delete trip')
+    fetch(`http://localhost:3000/api/v1/trips/${trip.id}`,{
+    method: 'DELETE'
+  })
+  this.setState({
+    trips: this.state.trips.filter((obj) => {return obj !== trip})
+  })
   }
 
   searchAppointments = (e) => {

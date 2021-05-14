@@ -5,15 +5,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login'
+import Signup from '../Login/Signup'
 // import Logout from '../Login/Logout'
 import Information from '../Information/Information'
+// import e from 'express';
 // import Preferences from '../Preferences/Preferences';
 
 class App extends React.Component {
 
   state = {
     time: new Date().toLocaleString(),
-    currentUser: ''
+    currentUser: '',
+    // usersArray: []
   }
 
   handleLogin = (e) => {
@@ -28,6 +31,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         // debugger
+        // console.log(data)
         console.log(data.find(user => user.name === loggedInUser.name))
         this.setState({
           currentUser: data.find(user => user.name === loggedInUser.name)
@@ -39,6 +43,33 @@ handleLogout = (e) => {
 e.preventDefault()
 window.location.href = "/login";
 }
+
+
+
+// getUsers = () => {
+//   fetch('http://localhost:3000/api/v1/users')
+//   .then(res => res.json())
+//   .then(allUsers => this.setState({
+//     usersArray: allUsers
+//   }))
+//   }
+
+// createUser = (newUser) => {
+//   let reqPackage = {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     },
+//     body: JSON.stringify(newUser)
+//   }
+  
+//   fetch('http://localhost:3000/api/v1/users', reqPackage)
+//   .then(res => res.json())
+//   .then(user => this.setState({
+//     usersArray: [...this.state.usersArray, user]
+//   }))
+// }
 
 
   render() {
@@ -69,10 +100,12 @@ window.location.href = "/login";
             <Route path="/information">
               <Information />
             </Route>
+            <Route path="/signup">
+              <Signup createUser={this.createUser} />
+            </Route>
           </Switch>
-          <br></br>
-          <br></br>
           <button onClick={this.handleLogout} className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
+          {/* <button onClick={this.handleSignUp} className="button"><a id="link" href='/login'><h3>Sign Up</h3></a></button> */}
         </BrowserRouter>
       </div>
     );

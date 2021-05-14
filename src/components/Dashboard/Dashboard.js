@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
           appointments: user.appointments
         })
       })
-
+      return console.log("currentUser")
   }
 
   listSubmit = (e) => {
@@ -304,7 +304,7 @@ class Dashboard extends React.Component {
       method: 'DELETE'
     })
     this.setState({
-      goals: this.state.goals.filter((obj) => {return obj !== goal})
+      goals: this.state.goals.filter((goalObj) => {return goalObj !== goal})
     })
   }
 
@@ -338,6 +338,7 @@ class Dashboard extends React.Component {
 
   tripEdit = () => {
     console.log('edit trip')
+
   }
 
   tripDelete = (trip) => {

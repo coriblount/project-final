@@ -16,7 +16,7 @@ class App extends React.Component {
   state = {
     time: new Date().toLocaleString(),
     currentUser: '',
-    // usersArray: []
+    usersArray: []
   }
 
   handleLogin = (e) => {
@@ -46,30 +46,30 @@ window.location.href = "/login";
 
 
 
-// getUsers = () => {
-//   fetch('http://localhost:3000/api/v1/users')
-//   .then(res => res.json())
-//   .then(allUsers => this.setState({
-//     usersArray: allUsers
-//   }))
-//   }
+getUsers = () => {
+  fetch('http://localhost:3000/api/v1/users')
+  .then(res => res.json())
+  .then(allUsers => this.setState({
+    usersArray: allUsers
+  }))
+  }
 
-// createUser = (newUser) => {
-//   let reqPackage = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     },
-//     body: JSON.stringify(newUser)
-//   }
+createUser = (newUser) => {
+  let reqPackage = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(newUser)
+  }
   
-//   fetch('http://localhost:3000/api/v1/users', reqPackage)
-//   .then(res => res.json())
-//   .then(user => this.setState({
-//     usersArray: [...this.state.usersArray, user]
-//   }))
-// }
+  fetch('http://localhost:3000/api/v1/users', reqPackage)
+  .then(res => res.json())
+  .then(user => this.setState({
+    usersArray: [...this.state.usersArray, user]
+  }))
+}
 
 
   render() {
@@ -98,7 +98,7 @@ window.location.href = "/login";
             <Preferences />
           </Route> */}
             <Route path="/information">
-              <Information />
+              <Information currentUser={this.state.currentUser}/>
             </Route>
             <Route path="/signup">
               <Signup createUser={this.createUser} />

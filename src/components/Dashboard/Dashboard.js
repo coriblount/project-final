@@ -15,6 +15,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 
+
 class Dashboard extends React.Component {
 
   state = {
@@ -38,7 +39,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.currentUser)
+    // console.log(this.props.currentUser)
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
       .then(res => res.json())
       .then(user =>{
@@ -50,18 +51,18 @@ class Dashboard extends React.Component {
           appointments: user.appointments
         })
       })
-      return console.log("currentUser")
+      // return console.log("currentUser")
   }
 
   listSubmit = (e) => {
     e.preventDefault()
 
-    let newGoal = {
-      "name": e.target[0].value,
-      "start_date": e.target[1].value,
-      "completion_date": e.target[2].value
-    }
-    // console.log(newGoal)
+    let newGoal = { name: e.target[0].value,
+      start: e.target[1].value, 
+      completion: e.target[2].value,
+      user_id: this.props.currentUser.id}
+    console.log(newGoal)
+
     fetch("http://localhost:3000/api/v1/goals", {
       method: "POST",
       headers: {
@@ -72,24 +73,22 @@ class Dashboard extends React.Component {
     })
       .then(resp => resp.json())
       .then(newGoal => 
-      this.setState({
-      goals: [...this.state.goals, newGoal]
-    })
-      )}
+      this.setState({goals: [...this.state.goals, newGoal]})
+    )
+     e.target.reset();
+    }
 
 
   tripSubmit = (e) => {
     e.preventDefault()
-    let newName = e.target[0].value
-    let newDate = e.target[1].value
-    let newDestination = e.target[2].value
 
     let newTrip = {
-      "name": newName,
-      "date": newDate,
-      "destination": newDestination
+      name: e.target[0].value,
+      date: e.target[1].value,
+      destination: e.target[2].value,
+      user_id: this.props.currentUser.id
     }
-    // console.log(newTrip)
+    console.log(newTrip)
     fetch("http://localhost:3000/api/v1/trips/", {
       method: "POST",
       headers: {
@@ -103,22 +102,18 @@ class Dashboard extends React.Component {
        this.setState({
       trips: [...this.state.trips, newTrip]
     }))
+     e.target.reset();
   }
 
   handleAppointment = (e) => {
     e.preventDefault()
-    // console.log(e.target.value)
 
-    // let newName = e.target[0].name
-    // let newDate = e.target[1].value
-    // let newDestination = e.target[2].value
     let newAppointment = {
       name: e.target[0].value,
       date: e.target[1].value,
-      time: e.target[2].value
+      time: e.target[2].value, 
+      user_id: this.props.currentUser.id
     }
-
-    // console.log(newAppointment)
 
     fetch("http://localhost:3000/api/v1/appointments/", {
       method: "POST",
@@ -133,23 +128,18 @@ class Dashboard extends React.Component {
       this.setState({
       appointments: [...this.state.appointments, newAppointment]
     }))
+    e.target.reset();
   }
 
   submitExpense = (e) => {
     e.preventDefault()
-    // console.log(e.target.value)
 
-    // let newName = e.target[0].name
-    // let newDate = e.target[1].value
-    // let newDestination = e.target[2].value
     let newExpense = {
       name: e.target[0].value,
       amount: e.target[1].value,
-      month: e.target[2].value
+      month: e.target[2].value, 
+      user_id: this.props.currentUser.id
     }
-
-    // console.log(newExpense)
-
     fetch("http://localhost:3000/api/v1/finance_items", {
       method: "POST",
       headers: {
@@ -163,6 +153,7 @@ class Dashboard extends React.Component {
       this.setState({
       finances: [...this.state.finances, newExpense]
     }))
+     e.target.reset();
   }
 
 
@@ -237,7 +228,7 @@ class Dashboard extends React.Component {
   }
 
   handleGoal = (goal) => {
-    fetch(`http://localhost:3000/goals/${goal.id}`, {
+    fetch(`http://localhost:3000/api/v1/goals/${goal.id}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json',
@@ -252,13 +243,13 @@ class Dashboard extends React.Component {
   }
 
   handleReset = (goal) => {
-    fetch(`http://localhost:3000/goals/${goal.id}`, {
+    fetch(`http://localhost:3000/api/v1/goals/${goal.id}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json'
       },
-      body: JSON.stringify({ start: goal.start - 7 })
+      body: JSON.stringify({ start: goal.start - 7})
     })
       .then(resp => resp.json())
       .then(numberGoal => this.setState({
@@ -295,10 +286,6 @@ class Dashboard extends React.Component {
     })
   }
 
-  goalDone = () => {
-    console.log('done')
-  }
-
   goalDelete = (goal) => {
     console.log('delete goal')
     fetch(`http://localhost:3000/goals/${goal.id}`,{
@@ -330,7 +317,7 @@ class Dashboard extends React.Component {
   }
 
   financeDelete = (finances) => {
-    console.log('delete expense')
+    // console.log('delete expense')
     fetch(`http://localhost:3000/api/v1/finance_items/${finances.id}`,{
       method: 'DELETE'
     })
@@ -387,7 +374,7 @@ class Dashboard extends React.Component {
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
         {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments} />}
         {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment} />}
-        {this.state.allAppt && <Calendar style={{margin: "align-center"}}/>}
+        {this.state.allAppt && <Calendar />}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete} />}
 
         <h4>Finances</h4>

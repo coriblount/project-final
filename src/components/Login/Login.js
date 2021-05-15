@@ -4,10 +4,17 @@ import './Login.css';
 export default function Login(props) {
 
 
+
+
+
+
   return (
     <div className="login-wrapper">
       <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
-      <p>Please Log In</p>
+      <br></br>
+      <button className= "buttoncreate" onClick={props.handleCreate}>Create an Account</button>
+      <br></br>
+      <p>Log In</p>
       <form onSubmit={props.handleLogin}>
         <label>
           <p>Username</p>
@@ -21,6 +28,7 @@ export default function Login(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      
     </div>
   )
 }

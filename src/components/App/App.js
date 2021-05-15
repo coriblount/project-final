@@ -19,6 +19,14 @@ class App extends React.Component {
     usersArray: []
   }
 
+
+handleCreate = (e) => {
+  e.preventDefault()
+console.log('clicked')
+window.location.href = "/SignUp";
+// window.open('http://localhost:3001/dashboard', "_blank")
+}
+
   handleLogin = (e) => {
     e.preventDefault()
     // debugger
@@ -32,7 +40,7 @@ class App extends React.Component {
       .then(data => {
         // debugger
         // console.log(data)
-        console.log(data.find(user => user.name === loggedInUser.name))
+        // console.log(data.find(user => user.name === loggedInUser.name))
         this.setState({
           currentUser: data.find(user => user.name === loggedInUser.name)
         })
@@ -74,12 +82,12 @@ createUser = (newUser) => {
 
   render() {
     if (this.state.currentUser === '') {
-      return <Login handleLogin={this.handleLogin} />
+      return <Login handleLogin={this.handleLogin} handleCreate={this.handleCreate}/>
     }
     return (
       <div className="wrapper">
         <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
-        {/* <h1>My Planner</h1> */}
+
         <div className="date">
           <p>
             {this.state.time}
@@ -94,9 +102,6 @@ createUser = (newUser) => {
             <Route path="/dashboard">
               <Dashboard currentUser={this.state.currentUser} />
             </Route>
-            {/* <Route path="/preferences">
-            <Preferences />
-          </Route> */}
             <Route path="/information">
               <Information currentUser={this.state.currentUser}/>
             </Route>
@@ -104,6 +109,7 @@ createUser = (newUser) => {
               <Signup createUser={this.createUser} />
             </Route>
           </Switch>
+          <br></br>
           <button onClick={this.handleLogout} className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
           {/* <button onClick={this.handleSignUp} className="button"><a id="link" href='/login'><h3>Sign Up</h3></a></button> */}
         </BrowserRouter>

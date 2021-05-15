@@ -1,42 +1,32 @@
-import React, { Component } from "react";
+import React from 'react';
+import './Login.css';
 
-export default class SignUp extends Component {
-
-    handlesubmit=(e)=>{
-        e.preventDefault()
-        let newUsername = e.target[0].value
-        let newPassword = e.target[1].value
+export default function SignUp(props) {
 
 
-        let updatedUser = {
-            "name": newUsername,
-            "password": newPassword
-        }
-        this.props.createUser(updatedUser)
-    }
-
-    // changeHandler=(e)=>{
-    //     e.preventDefault()
-    //   let {name, value} = e.target
-    //   this.setState({
-    //     [name]: value
-    //   })
-    // }
-
-    render(){
-        return (
-          <div>
-              <h1>Sign Up</h1>
-              <form onSubmit={this.handlesubmit}>
-                <label>UserName</label>
-                <input type='text' name='name' placeholder='Enter Userame Here'  /> 
-                <br/> <br/>
-                <label>Password</label>
-                <input type='text' name='password' placeholder='Enter Password'  /> 
-                <br/> <br/>
-                <input type="submit" name="submit" value="Sign Up" className="submit"/>
-              </form>
-          </div>
-        )
-    }
+  return (
+    <div className="login-wrapper">
+    <h1>Create an Account</h1>
+    <h1> Form </h1>
+    
+      {/* <br></br>
+      <button className= "button" onClick={props.handleCreate}>Create an Account</button>
+      <br></br>
+      <p>Log In</p>
+      <form onSubmit={props.handleLogin}>
+        <label>
+          <p>Username</p>
+          <input type="text" onChange={console.log()} />
+        </label>
+        <label>
+          <p>Password</p>
+          <input type="password" onChange={console.log()} />
+        </label>
+        <div>
+          <button type="submit">Submit</button>
+        </div> */}
+      {/* </form> */}
+      
+    </div>
+  )
 }

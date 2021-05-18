@@ -3,7 +3,7 @@ import React from 'react'
 const SearchAppointments = (props) => {
     return (
         <div className="ui large fluid icon input">
-          <input
+          {/* <input
             type="text"
             placeholder={"Search Appointment"}
             onChange={(e) => {
@@ -11,7 +11,21 @@ const SearchAppointments = (props) => {
             }}
           />
           <i className="circular search link icon"></i>
+       */}
+    
+          <input
+            type="text"
+            placeholder={"Search Date"}
+            onChange={(e) => {
+              props.searchDateAppt(e)
+            }}
+          />
+          <i className="circular search link icon"></i>
         </div>
+
+
+
+
       );
 }
 

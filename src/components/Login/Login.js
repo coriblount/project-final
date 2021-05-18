@@ -1,21 +1,18 @@
 import React from 'react';
 import './Login.css';
 
-export default function Login(props) {
+
+class Login extends React.Component  {
 
 
-
-
-
-
-  return (
-    <div className="login-wrapper">
+render () {
+    return (
+ <div className="login-wrapper">
       <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
       <br></br>
-      <button className= "buttoncreate" onClick={props.handleCreate}>Create an Account</button>
+      <button className = "welcomebuttons" onClick={this.props.handleCreate}>Sign In</button>
       <br></br>
-      <p>Log In</p>
-      <form onSubmit={props.handleLogin}>
+      <form onSubmit={this.props.handleLogin}>
         <label>
           <p>Username</p>
           <input type="text" onChange={console.log()} />
@@ -25,10 +22,15 @@ export default function Login(props) {
           <input type="password" onChange={console.log()} />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button className="button" type="submit">Submit</button>
         </div>
       </form>
       
     </div>
-  )
+    )
 }
+}
+  
+
+export default Login
+

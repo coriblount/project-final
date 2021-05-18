@@ -10,6 +10,7 @@ import FinanceForm from '../FinanceForm'
 import ListForm from '../ListForm'
 import CalendarForm from '../CalendarForm'
 import SearchForm from '../SearchForm'
+import EditTrip from '../EditTrip'
 import SearchAppointments from '../SearchAppointments'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
@@ -18,8 +19,11 @@ import 'react-calendar/dist/Calendar.css';
 
 class Dashboard extends React.Component {
 
+
+
   state = {
     trips: [],
+    trip: [],
     goals: [],
     list: [],
     finances: [],
@@ -35,11 +39,16 @@ class Dashboard extends React.Component {
     allAppt: false,
     apptForm: false,
     showFinances: [],
-    showAppointments: []
+    showAppointments: [],
+    dateAppt: [],
+    date: new Date()
   }
 
+onChange = date => this.setState ({ date })
+ 
+
   componentDidMount() {
-    // console.log(this.props.currentUser)
+    console.log("currentUser", this.props)
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
       .then(res => res.json())
       .then(user =>{
@@ -51,7 +60,7 @@ class Dashboard extends React.Component {
           appointments: user.appointments
         })
       })
-      // return console.log("currentUser")
+      // console.log("currentUser", this.props.currentUser)
   }
 
   listSubmit = (e) => {
@@ -271,8 +280,11 @@ class Dashboard extends React.Component {
   }
 
   displayAppointments = () => {
-    const showAppointments = this.state.appointments.filter(appt => appt.name.toLowerCase().includes(this.state.showAppointments))
-    return showAppointments
+    
+    // const showAppointments = this.state.appointments.filter(appt => appt.name.toLowerCase().includes(this.state.showAppointments))
+    const dateAppt = this.state.appointments.filter(appt => appt.date.toLowerCase().includes(this.state.dateAppt))
+    // return [showAppointments,  dateAppt ]
+    return dateAppt
   }
 
 
@@ -326,19 +338,62 @@ class Dashboard extends React.Component {
     })
   }
 
-//   tripEdit = (trip) => {
-//     console.log('edit trip')
-//     fetch(`http://localhost:3000/api/v1/trips/${trip.id}`, {
-//       method: 'PATCH',
-//     headers: {
-//       'content-type': 'application/json',
-//       'accept': 'application/json'
-//     },
-//     body: JSON.stringify(trip)
-//   })
-//   .then(res => res.json())
-//   .then(trip => )
-// }
+
+handleEdit = (trip) => {
+  console.log(trip)
+  this.setState({trip: trip})
+}
+
+changeTripName = (event) => {
+const tripName = event.target.value
+console.log(tripName)
+this.setState (tripBefore => {
+  return {trip: {...tripBefore.trip, name: tripName}}
+})
+}
+
+changeTripDate = (event) => {
+const tripDate = event.target.value
+console.log(tripDate)
+this.setState (tripBefore => {
+  return {trip: {...tripBefore.trip, date: tripDate}}
+})
+}
+
+changeTripDestination = (event) => {
+  const tripDestination = event.target.value
+console.log(tripDestination)
+this.setState (tripBefore => {
+  return {trip: {...tripBefore.trip, destination: tripDestination}}
+})
+}
+
+
+  tripEdit = (trip) => {
+    console.log('edit trip')
+  if (this.state.trip.id) {
+    const tripId = this.state.pizza.id
+    fetch(`http://localhost:3000/api/v1/trips/${trip.id}`, {
+      method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify(this.state.trip)
+  })
+  .then(res => res.json())
+  .then(tripUpdated => {
+    const newTrip = this.state.trips.map(trip => {
+if (trip.id === tripId) {
+  return tripUpdated 
+    } else {
+  return trip
+    } 
+  })
+this.setState({trips: newTrip})
+      }) 
+  }
+}
 
   tripDelete = (trip) => {
     console.log('delete trip')
@@ -356,39 +411,49 @@ class Dashboard extends React.Component {
     })
   }
 
+    searchDateAppt = (e) => {
+    this.setState({
+      dateAppt: e.target.value
+    })
+  }
+
 
   render() {
 
-  
-
     return (
+
+
       <div>
+        
         <h4>To do List</h4>
         <button className="button" onClick={this.allList}><h3>Todo List</h3></button>
         <button className="button" onClick={this.listForm}><h3>New task</h3></button>
         {this.state.listForm && <ListForm todoSubmit={this.todoSubmit} />}
         {this.state.allList && <Lists list={this.state.list} taskDelete={this.taskDelete} />}
 
-        <h4>Calendar</h4>
+        <h4 >Calendar</h4>
         <button className="button" onClick={this.allAppt}><h3>My Calendar</h3></button>
         <button className="button" onClick={this.apptForm}><h3>New Appointment</h3></button>
-        {this.state.allAppt && <SearchAppointments searchAppointments={this.searchAppointments} />}
-        {this.state.apptForm && <CalendarForm handleAppointment={this.handleAppointment} />}
-        {this.state.allAppt && <Calendar />}
+        <div className="center">
+        {this.state.allAppt && <Calendar onChange={this.onChange} value={this.state.date}/>}
+        {/* {console.log(this.state.date.toString())} */}
+        </div>
+        {this.state.apptForm && <CalendarForm value={this.state.date.toString()} handleAppointment={this.handleAppointment} />}
+        {this.state.allAppt && <SearchAppointments searchDateAppt={this.searchDateAppt} searchAppointments={this.searchAppointments} />}
         {this.state.allAppt && <Calendars appointments={this.displayAppointments()} appointmentEdit={this.appointmentEdit} appointmentDelete={this.appointmentDelete} />}
-
         <h4>Finances</h4>
         <button className="button" onClick={this.allFinance}><h3>Finances</h3></button>
         <button className="button" onClick={this.financeForm}><h3>New add bill</h3></button>
         {this.state.financeForm && <FinanceForm submitExpense={this.submitExpense} />}
         {this.state.allFinance && <SearchForm searchFinances={this.searchFinances} />}
-        {this.state.allFinance && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete} />}
+        {this.state.allFinance && <Finances finances={this.displayFinances()} financeEdit={this.financeEdit} financeDelete={this.financeDelete} tripEdit={this.tripEdit}/>}
 
         <h4>Travel</h4>
         <button className="button" onClick={this.allTrips}>My Trips</button>
         <button className="button" onClick={this.tripForm}>Add a new trip</button>
         {this.state.tripForm && <TripForm tripSubmit={this.tripSubmit} />}
         {this.state.allTrips && <Trips trips={this.state.trips} tripDelete={this.tripDelete} tripEdit={this.tripEdit} />}
+         {this.state.allTrips && <EditTrip trip={this.state.trip} handleEdit={this.handleEdit} changeTripName={this.changeTripName} changeTripDate={this.changeTripDate} changeTripDestination={this.changeTripDestination} />}
         <br></br>
         <button className="button"><a id="link" href='https://upgradedpoints.com/wp-content/uploads/2018/10/Printable-Travel-Packing-List.pdf'><h3>My packing list</h3></a></button>
         <br></br>

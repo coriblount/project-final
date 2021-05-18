@@ -24,7 +24,6 @@ handleCreate = (e) => {
   e.preventDefault()
 console.log('clicked')
 window.location.href = "/SignUp";
-// window.open('http://localhost:3001/dashboard', "_blank")
 }
 
   handleLogin = (e) => {
@@ -38,9 +37,8 @@ window.location.href = "/SignUp";
     fetch('http://localhost:3000/api/v1/users')
       .then(res => res.json())
       .then(data => {
-        // debugger
-        // console.log(data)
-        // console.log(data.find(user => user.name === loggedInUser.name))
+        // console.log("data", data)
+        // console.log("loggedInUser", loggedInUser)
         this.setState({
           currentUser: data.find(user => user.name === loggedInUser.name)
         })
@@ -54,39 +52,42 @@ window.location.href = "/login";
 
 
 
-getUsers = () => {
-  fetch('http://localhost:3000/api/v1/users')
-  .then(res => res.json())
-  .then(allUsers => this.setState({
-    usersArray: allUsers
-  }))
-  }
+// getUsers = () => {
+//   fetch('http://localhost:3000/api/v1/users')
+//   .then(res => res.json())
+//   .then(allUsers => this.setState({
+//     usersArray: allUsers
+//   }))
+//   }
 
-createUser = (newUser) => {
-  let reqPackage = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(newUser)
-  }
+// createUser = (newUser) => {
+//   let reqPackage = {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     },
+//     body: JSON.stringify(newUser)
+//   }
   
-  fetch('http://localhost:3000/api/v1/users', reqPackage)
-  .then(res => res.json())
-  .then(user => this.setState({
-    usersArray: [...this.state.usersArray, user]
-  }))
-}
+//   fetch('http://localhost:3000/api/v1/users', reqPackage)
+//   .then(res => res.json())
+//   .then(user => this.setState({
+//     usersArray: [...this.state.usersArray, user]
+//   }))
+// }
 
 
   render() {
-    if (this.state.currentUser === '') {
-      return <Login handleLogin={this.handleLogin} handleCreate={this.handleCreate}/>
-    }
-    return (
-      <div className="wrapper">
-        <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="calendar" width="350" height="300"></img>
+
+  // console.log("user", this.state.currentUser)
+  if (this.state.currentUser === '') {
+   return <Login handleLogin={this.handleLogin} />
+  } 
+  
+  return (
+    <div className="wrapper">
+        <img src="https://i.ibb.co/hRgJTGF/Screen-Shot-2021-05-12-at-12-01-10-PM.png" alt="planner" width="350" height="300"></img>
 
         <div className="date">
           <p>
@@ -106,9 +107,10 @@ createUser = (newUser) => {
               <Information currentUser={this.state.currentUser}/>
             </Route>
             <Route path="/signup">
-              <Signup createUser={this.createUser} />
+              <Signup handleCreate={this.handleCreate}/>
             </Route>
           </Switch>
+          <br></br>
           <br></br>
           <button onClick={this.handleLogout} className="button"><a id="link" href='/'><h3>Log out</h3></a></button>
           {/* <button onClick={this.handleSignUp} className="button"><a id="link" href='/login'><h3>Sign Up</h3></a></button> */}

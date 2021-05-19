@@ -28,7 +28,7 @@ handleReset = () => {
 render(){
   const goal = [
     { name: 'days completed', value: this.props.goal.start },
-    { name: 'remaining days', value: this.props.goal.completion}
+    { name: 'days to complete goal', value: this.props.goal.completion}
   ];
 
 // console.log(this.props.goal)

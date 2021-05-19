@@ -32,6 +32,11 @@ class CalendarForm extends React.Component {
         <input type="text" name="time" placeholder="time"></input>
         <br></br>
         <button className="action-button" type="submit">New Appointment</button>
+        <br></br>
+        <br></br>
+        <br></br>
+        
+
         </form>
 
         </div>

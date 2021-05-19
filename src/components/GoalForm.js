@@ -7,11 +7,10 @@ render() {
 <form onSubmit={this.props.listSubmit}>
 <input type="text" name="name" placeholder="name"></input>
 <br></br>
-<input type="text" name="start" placeholder="start date"></input>
-<br></br>
-<input type="text" name="completion" placeholder="completion date"></input>
-<br></br>
+<input type="text" className="goal" name="start" value="0"></input>
+<input type="text" className="goal" name="completion" value="7"></input>
 <button className="action-button" type="submit">Add Goal</button>
+<br></br>
 <br></br>
 </form>
 </div>

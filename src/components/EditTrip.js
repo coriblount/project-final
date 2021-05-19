@@ -1,45 +1,59 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const EditTrip = (props) => { 
+class EditTrip extends Component {
 
-    return (
-        <div></div>
-// {/* <div>
-//         <div>
-//             <input  type="text"
-//             onChange={props.changeTripName} placeholder='name' value={
-//               props.trip.name
-//               }/>
-//         </div>
-//         <div >
-//          <input  type="text"
-//             onChange={props.changeTripDate} placeholder='date' value={
-//               props.trip.date
-//               }/>
-//         </div>
-//           <div className="form-check">
-//                 <input  type="text"
-//             onChange={props.changeTripDestination} placeholder='date' value={
-//               props.trip.date
-//               }/>
-//         </div>
-//           {/* <button type="submit" className="btn btn-success" onClick={props.tripEdit}>Submit</button> */}
-//       </div> */}
+    state = {
+        trip: {name: '', date: '', destination: ''},
+    }
 
-  )
+    handleFormChange(event) {
+        const inputName = event.target.name;
+        const inputValue = event.target.value;
+        const oldTrip = this.state.trip;
+        oldTrip[inputName] = inputValue;
+        this.setState({trip: oldTrip});
+    }
+
+    saveForm = () => {
+        fetch(`http://localhost:3000/api/v1/trips/${this.props.trip.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(this.state.trip),
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(updatedTrip => {
+            this.props.updateTrips(updatedTrip);
+        })
+
+        this.props.hideForm();
+    }
+
+    componentDidMount = () => {
+        this.setState({trip: this.props.trip});
+    }
+
+    render() {
+        const currentTrip = this.state.trip ;
+        return (
+            <div>
+                <form>
+                    <input type="text" onChange={(e) => this.handleFormChange(e)} name="name" value={currentTrip.name}></input>
+                    <input type="text" onChange={(e) => this.handleFormChange(e)} name="date" value={currentTrip.date} placeholder="date"></input>
+                    <input type="text" onChange={(e) => this.handleFormChange(e)} name="destination" value={currentTrip.destination} placeholder="destination"></input>
+
+                    <button className="action-button" onClick={this.saveForm} type="submit">Edit Trip</button>
+                    <br></br>
+                </form>
+            </div>
+
+        )
+
+    }
+
+
 }
-        // <tr>
-        // <td>{props.trip.name}</td>
-        // <td>{props.trip.date}</td>
-        // <td>{props.trip.destination}</td>
-        // <td><button onClick={handleClick}
-        // type="button"> Edit Trip</button>
-        // </td>
-        // </tr>
-
-
-        
-    
-
 
 export default EditTrip

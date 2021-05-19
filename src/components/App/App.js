@@ -19,7 +19,6 @@ class App extends React.Component {
     usersArray: []
   }
 
-
 handleCreate = (e) => {
   e.preventDefault()
 console.log('clicked')
@@ -39,50 +38,38 @@ window.location.href = "/SignUp";
       .then(data => {
         // console.log("data", data)
         // console.log("loggedInUser", loggedInUser)
-        this.setState({
-          currentUser: data.find(user => user.name === loggedInUser.name)
-        })
-      })
+        const foundUser = data.find(user => user.name === loggedInUser.name);
+        if (foundUser){
+        localStorage.setItem("user", JSON.stringify(foundUser))
+        this.setState({currentUser: foundUser})
+      }
+    })
   }
 
 handleLogout = (e) => {
 e.preventDefault()
+localStorage.removeItem("user");
 window.location.href = "/login";
 }
 
 
-
-// getUsers = () => {
-//   fetch('http://localhost:3000/api/v1/users')
-//   .then(res => res.json())
-//   .then(allUsers => this.setState({
-//     usersArray: allUsers
-//   }))
-//   }
-
-// createUser = (newUser) => {
-//   let reqPackage = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     },
-//     body: JSON.stringify(newUser)
-//   }
-  
-//   fetch('http://localhost:3000/api/v1/users', reqPackage)
-//   .then(res => res.json())
-//   .then(user => this.setState({
-//     usersArray: [...this.state.usersArray, user]
-//   }))
-// }
-
+componentDidMount = () => {
+  //get the user from localstorage, set the state to the user
+  const storedUser = localStorage.getItem("user");
+  if (storedUser){
+    this.setState({currentUser: JSON.parse(storedUser)})
+  }
+}
 
   render() {
 
   // console.log("user", this.state.currentUser)
   if (this.state.currentUser === '') {
-   return <Login handleLogin={this.handleLogin} />
+    if (window.location.pathname.toLowerCase() === '/signup') {
+      return <Signup handleSignup={this.handleSignup} />
+    }else{
+      return <Login handleLogin={this.handleLogin} />
+    }
   } 
   
   return (

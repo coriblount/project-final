@@ -8,7 +8,7 @@ class Information extends React.Component {
 render() {
  return (
 <div>
- <h2>Hello, </h2>
+ <h2>Hello, Adri</h2>
 </div>
 )
  }
